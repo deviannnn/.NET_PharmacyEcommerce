@@ -1,0 +1,15 @@
+﻿@model  IEnumerable<Pharmacy.Models.News>
+
+@foreach (var news in Model)
+{
+    <div class="col-md-6 col-lg-4 mb-4 mb-lg-0">
+        <div class="banner-wrap bg-primary h-100">
+            <a href="@news.meta" class="h-100">
+                <h5>@news.tittle</h5>
+                <p>
+                    <strong>@news.content</strong>
+                </p>
+            </a>
+        </div>
+    </div>
+}    

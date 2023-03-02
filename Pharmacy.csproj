@@ -45,10 +45,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -124,30 +132,51 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Footer.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Menu.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Model1.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Model1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Model1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\News.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Product.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SubMenu.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\bootstrap-theme.css" />
-    <Content Include="Content\bootstrap-theme.min.css" />
-    <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
-    <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Content\Site.css" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
-    <None Include="Scripts\jquery-3.4.1.intellisense.js" />
-    <Content Include="Scripts\jquery-3.4.1.js" />
-    <Content Include="Scripts\jquery-3.4.1.min.js" />
-    <Content Include="Scripts\jquery-3.4.1.slim.js" />
-    <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
-    <None Include="Scripts\jquery.validate-vsdoc.js" />
-    <Content Include="Scripts\jquery.validate.js" />
-    <Content Include="Scripts\jquery.validate.min.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
-    <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Models\Model1.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Model1.Context.cs</LastGenOutput>
+      <DependentUpon>Model1.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\Model1.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Model1.edmx</DependentUpon>
+      <LastGenOutput>Model1.cs</LastGenOutput>
+    </Content>
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -162,23 +191,165 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="wwwroot\css\aos.css" />
+    <Content Include="wwwroot\css\bootstrap.min.css" />
+    <Content Include="wwwroot\css\bootstrap\bootstrap-grid.css" />
+    <Content Include="wwwroot\css\bootstrap\bootstrap-reboot.css" />
+    <Content Include="wwwroot\css\bootstrap\bootstrap.css" />
+    <Content Include="wwwroot\css\jquery-ui.css" />
+    <Content Include="wwwroot\css\magnific-popup.css" />
+    <Content Include="wwwroot\css\owl.carousel.min.css" />
+    <Content Include="wwwroot\css\owl.theme.default.min.css" />
+    <Content Include="wwwroot\css\style.css" />
+    <Content Include="wwwroot\fonts\icomoon\demo-files\demo.css" />
+    <Content Include="wwwroot\fonts\icomoon\demo-files\demo.js" />
+    <Content Include="wwwroot\fonts\icomoon\demo.html" />
+    <Content Include="wwwroot\fonts\icomoon\fonts\icomoon.svg" />
+    <Content Include="wwwroot\fonts\icomoon\Read Me.txt" />
+    <Content Include="wwwroot\fonts\icomoon\style.css" />
+    <Content Include="wwwroot\images\bg_1.jpg" />
+    <Content Include="wwwroot\images\bg_2.jpg" />
+    <Content Include="wwwroot\images\hero_1.jpg" />
+    <Content Include="wwwroot\images\person_1.jpg" />
+    <Content Include="wwwroot\images\person_2.jpg" />
+    <Content Include="wwwroot\images\person_3.jpg" />
+    <Content Include="wwwroot\images\person_4.jpg" />
+    <Content Include="wwwroot\images\person_5.jpg" />
+    <Content Include="wwwroot\images\products_1.png" />
+    <Content Include="wwwroot\images\product_01.png" />
+    <Content Include="wwwroot\images\product_02.png" />
+    <Content Include="wwwroot\images\product_03.png" />
+    <Content Include="wwwroot\images\product_04.png" />
+    <Content Include="wwwroot\images\product_05.png" />
+    <Content Include="wwwroot\images\product_06.png" />
+    <Content Include="wwwroot\images\product_07_large.png" />
+    <Content Include="wwwroot\images\shoe.png" />
+    <Content Include="wwwroot\images\wave.svg" />
+    <Content Include="wwwroot\images\women.jpg" />
+    <Content Include="wwwroot\js\aos.js" />
+    <Content Include="wwwroot\js\bootstrap.min.js" />
+    <Content Include="wwwroot\js\jquery-3.3.1.min.js" />
+    <Content Include="wwwroot\js\jquery-ui.js" />
+    <Content Include="wwwroot\js\jquery.magnific-popup.min.js" />
+    <Content Include="wwwroot\js\main.js" />
+    <Content Include="wwwroot\js\owl.carousel.min.js" />
+    <Content Include="wwwroot\js\popper.min.js" />
+    <Content Include="wwwroot\js\slick.min.js" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="Content\bootstrap.min.css.map" />
-    <Content Include="Content\bootstrap.css.map" />
-    <Content Include="Content\bootstrap-theme.min.css.map" />
-    <Content Include="Content\bootstrap-theme.css.map" />
+    <EntityDeploy Include="Models\Model1.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Model1.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Model1.edmx.diagram">
+      <DependentUpon>Model1.edmx</DependentUpon>
+    </Content>
     <None Include="packages.config" />
-    <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
-    <Content Include="Scripts\jquery-3.4.1.min.map" />
+    <Content Include="Views\Home\getFooter.cshtml" />
+    <Content Include="Views\Home\getMenu.cshtml" />
+    <Content Include="Views\Home\getNews.cshtml" />
+    <Content Include="Views\Home\getPopularProduct.cshtml" />
+    <Content Include="Views\Shared\_MyLayout.cshtml" />
+    <Content Include="wwwroot\css\bootstrap.min.css.map" />
+    <Content Include="wwwroot\fonts\icomoon\fonts\icomoon.eot" />
+    <Content Include="wwwroot\fonts\icomoon\fonts\icomoon.ttf" />
+    <Content Include="wwwroot\fonts\icomoon\fonts\icomoon.woff" />
+    <Content Include="wwwroot\fonts\icomoon\selection.json" />
+    <Content Include="wwwroot\scss\.DS_Store" />
+    <Content Include="wwwroot\scss\bootstrap\.DS_Store" />
+    <Content Include="wwwroot\scss\bootstrap\bootstrap-grid.scss" />
+    <Content Include="wwwroot\scss\bootstrap\bootstrap-reboot.scss" />
+    <Content Include="wwwroot\scss\bootstrap\bootstrap.scss" />
+    <Content Include="wwwroot\scss\bootstrap\mixins\_alert.scss" />
+    <Content Include="wwwroot\scss\bootstrap\mixins\_background-variant.scss" />
+    <Content Include="wwwroot\scss\bootstrap\mixins\_badge.scss" />
+    <Content Include="wwwroot\scss\bootstrap\mixins\_border-radius.scss" />
+    <Content Include="wwwroot\scss\bootstrap\mixins\_box-shadow.scss" />
+    <Content Include="wwwroot\scss\bootstrap\mixins\_breakpoints.scss" />
+    <Content Include="wwwroot\scss\bootstrap\mixins\_buttons.scss" />
+    <Content Include="wwwroot\scss\bootstrap\mixins\_caret.scss" />
+    <Content Include="wwwroot\scss\bootstrap\mixins\_clearfix.scss" />
+    <Content Include="wwwroot\scss\bootstrap\mixins\_float.scss" />
+    <Content Include="wwwroot\scss\bootstrap\mixins\_forms.scss" />
+    <Content Include="wwwroot\scss\bootstrap\mixins\_gradients.scss" />
+    <Content Include="wwwroot\scss\bootstrap\mixins\_grid-framework.scss" />
+    <Content Include="wwwroot\scss\bootstrap\mixins\_grid.scss" />
+    <Content Include="wwwroot\scss\bootstrap\mixins\_hover.scss" />
+    <Content Include="wwwroot\scss\bootstrap\mixins\_image.scss" />
+    <Content Include="wwwroot\scss\bootstrap\mixins\_list-group.scss" />
+    <Content Include="wwwroot\scss\bootstrap\mixins\_lists.scss" />
+    <Content Include="wwwroot\scss\bootstrap\mixins\_nav-divider.scss" />
+    <Content Include="wwwroot\scss\bootstrap\mixins\_pagination.scss" />
+    <Content Include="wwwroot\scss\bootstrap\mixins\_reset-text.scss" />
+    <Content Include="wwwroot\scss\bootstrap\mixins\_resize.scss" />
+    <Content Include="wwwroot\scss\bootstrap\mixins\_screen-reader.scss" />
+    <Content Include="wwwroot\scss\bootstrap\mixins\_size.scss" />
+    <Content Include="wwwroot\scss\bootstrap\mixins\_table-row.scss" />
+    <Content Include="wwwroot\scss\bootstrap\mixins\_text-emphasis.scss" />
+    <Content Include="wwwroot\scss\bootstrap\mixins\_text-hide.scss" />
+    <Content Include="wwwroot\scss\bootstrap\mixins\_text-truncate.scss" />
+    <Content Include="wwwroot\scss\bootstrap\mixins\_transition.scss" />
+    <Content Include="wwwroot\scss\bootstrap\mixins\_visibility.scss" />
+    <Content Include="wwwroot\scss\bootstrap\utilities\_align.scss" />
+    <Content Include="wwwroot\scss\bootstrap\utilities\_background.scss" />
+    <Content Include="wwwroot\scss\bootstrap\utilities\_borders.scss" />
+    <Content Include="wwwroot\scss\bootstrap\utilities\_clearfix.scss" />
+    <Content Include="wwwroot\scss\bootstrap\utilities\_display.scss" />
+    <Content Include="wwwroot\scss\bootstrap\utilities\_embed.scss" />
+    <Content Include="wwwroot\scss\bootstrap\utilities\_flex.scss" />
+    <Content Include="wwwroot\scss\bootstrap\utilities\_float.scss" />
+    <Content Include="wwwroot\scss\bootstrap\utilities\_position.scss" />
+    <Content Include="wwwroot\scss\bootstrap\utilities\_screenreaders.scss" />
+    <Content Include="wwwroot\scss\bootstrap\utilities\_shadows.scss" />
+    <Content Include="wwwroot\scss\bootstrap\utilities\_sizing.scss" />
+    <Content Include="wwwroot\scss\bootstrap\utilities\_spacing.scss" />
+    <Content Include="wwwroot\scss\bootstrap\utilities\_text.scss" />
+    <Content Include="wwwroot\scss\bootstrap\utilities\_visibility.scss" />
+    <Content Include="wwwroot\scss\bootstrap\_alert.scss" />
+    <Content Include="wwwroot\scss\bootstrap\_badge.scss" />
+    <Content Include="wwwroot\scss\bootstrap\_breadcrumb.scss" />
+    <Content Include="wwwroot\scss\bootstrap\_button-group.scss" />
+    <Content Include="wwwroot\scss\bootstrap\_buttons.scss" />
+    <Content Include="wwwroot\scss\bootstrap\_card.scss" />
+    <Content Include="wwwroot\scss\bootstrap\_carousel.scss" />
+    <Content Include="wwwroot\scss\bootstrap\_close.scss" />
+    <Content Include="wwwroot\scss\bootstrap\_code.scss" />
+    <Content Include="wwwroot\scss\bootstrap\_custom-forms.scss" />
+    <Content Include="wwwroot\scss\bootstrap\_dropdown.scss" />
+    <Content Include="wwwroot\scss\bootstrap\_forms.scss" />
+    <Content Include="wwwroot\scss\bootstrap\_functions.scss" />
+    <Content Include="wwwroot\scss\bootstrap\_grid.scss" />
+    <Content Include="wwwroot\scss\bootstrap\_images.scss" />
+    <Content Include="wwwroot\scss\bootstrap\_input-group.scss" />
+    <Content Include="wwwroot\scss\bootstrap\_jumbotron.scss" />
+    <Content Include="wwwroot\scss\bootstrap\_list-group.scss" />
+    <Content Include="wwwroot\scss\bootstrap\_media.scss" />
+    <Content Include="wwwroot\scss\bootstrap\_mixins.scss" />
+    <Content Include="wwwroot\scss\bootstrap\_modal.scss" />
+    <Content Include="wwwroot\scss\bootstrap\_nav.scss" />
+    <Content Include="wwwroot\scss\bootstrap\_navbar.scss" />
+    <Content Include="wwwroot\scss\bootstrap\_pagination.scss" />
+    <Content Include="wwwroot\scss\bootstrap\_popover.scss" />
+    <Content Include="wwwroot\scss\bootstrap\_print.scss" />
+    <Content Include="wwwroot\scss\bootstrap\_progress.scss" />
+    <Content Include="wwwroot\scss\bootstrap\_reboot.scss" />
+    <Content Include="wwwroot\scss\bootstrap\_root.scss" />
+    <Content Include="wwwroot\scss\bootstrap\_tables.scss" />
+    <Content Include="wwwroot\scss\bootstrap\_tooltip.scss" />
+    <Content Include="wwwroot\scss\bootstrap\_transitions.scss" />
+    <Content Include="wwwroot\scss\bootstrap\_type.scss" />
+    <Content Include="wwwroot\scss\bootstrap\_utilities.scss" />
+    <Content Include="wwwroot\scss\bootstrap\_variables.scss" />
+    <Content Include="wwwroot\scss\style.scss" />
+    <Content Include="wwwroot\scss\_site-base.scss" />
+    <Content Include="wwwroot\scss\_site-blocks.scss" />
+    <Content Include="wwwroot\scss\_site-navbar.scss" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
