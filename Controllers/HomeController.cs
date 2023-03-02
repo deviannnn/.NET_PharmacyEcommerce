@@ -21,6 +21,10 @@ namespace Pharmacy.Controllers
                     where t.hide == true
                     orderby t.order ascending
                     select t;
+            var z = from t in _db.Menus
+                    where t.hide == true
+                    orderby t.order ascending
+                    select t;
             return PartialView(v.ToList());
         }
 
