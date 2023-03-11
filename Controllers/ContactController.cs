@@ -7,20 +7,21 @@ using System.Web.Mvc;
 
 namespace Pharmacy.Controllers
 {
-    public class StoreController : Controller
+    public class ContactController : Controller
     {
-        // GET: Store
         PharmacyEntities _db = new PharmacyEntities();
+        // GET: Contact
         public ActionResult Index()
         {
             return View();
         }
-        public ActionResult getProduct()
+
+        public ActionResult getOffice()
         {
-            var v = (from p in _db.Products
-                     where p.hide == true
-                     orderby p.purchase descending
-                     select p).Take(6);
+            var v = from o in _db.Offices
+                    where o.hide == true
+                    orderby o.order ascending
+                    select o;
             return PartialView(v.ToList());
         }
     }

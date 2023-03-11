@@ -4,14 +4,18 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="13eb99df5385478c80e70237045a227e" Name="Diagram1">
-        <EntityTypeShape EntityType="PharmacyModel.Footer" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
+      <Diagram DiagramId="97eb94f647af44e6904b4135b81d5189" Name="Diagram1">
         <EntityTypeShape EntityType="PharmacyModel.Menu" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="PharmacyModel.News" Width="1.5" PointX="2.75" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="PharmacyModel.Product" Width="1.5" PointX="4.75" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="PharmacyModel.SubMenu" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="PharmacyModel.sysdiagram" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
         <AssociationConnector Association="PharmacyModel.SubMenu_idMenu_fk" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="PharmacyModel.Banner" Width="1.5" PointX="5.75" PointY="0.75" />
+        <EntityTypeShape EntityType="PharmacyModel.CompanyInfo" Width="1.5" PointX="7.75" PointY="0.75" />
+        <EntityTypeShape EntityType="PharmacyModel.ContactInfo" Width="1.5" PointX="7.75" PointY="4.75" />
+        <EntityTypeShape EntityType="PharmacyModel.QuickLink" Width="1.5" PointX="0.75" PointY="8.75" />
+        <EntityTypeShape EntityType="PharmacyModel.TeamInfo" Width="1.5" PointX="7.375" PointY="8.75" />
+        <EntityTypeShape EntityType="PharmacyModel.Office" Width="1.5" PointX="3.375" PointY="9.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

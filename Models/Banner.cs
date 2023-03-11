@@ -12,15 +12,16 @@ namespace Pharmacy.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Footer
+    public partial class Banner
     {
         public int id { get; set; }
+        public string tittle { get; set; }
         public string content { get; set; }
-        public string note { get; set; }
-        public Nullable<int> column { get; set; }
-        public Nullable<int> order { get; set; }
-        public Nullable<bool> hide { get; set; }
+        public string page { get; set; }
+        public string img { get; set; }
         public string meta { get; set; }
+        public Nullable<bool> hide { get; set; }
+        public Nullable<int> order { get; set; }
         public Nullable<System.DateTime> datebegin { get; set; }
     }
 }

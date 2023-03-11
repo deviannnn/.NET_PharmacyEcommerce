@@ -13,10 +13,10 @@ namespace Pharmacy.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class PharmacyEntities3 : DbContext
+    public partial class PharmacyEntities : DbContext
     {
-        public PharmacyEntities3()
-            : base("name=PharmacyEntities3")
+        public PharmacyEntities()
+            : base("name=PharmacyEntities")
         {
         }
     
@@ -25,11 +25,15 @@ namespace Pharmacy.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Footer> Footers { get; set; }
         public virtual DbSet<Menu> Menus { get; set; }
         public virtual DbSet<News> News { get; set; }
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<SubMenu> SubMenus { get; set; }
-        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
+        public virtual DbSet<Banner> Banners { get; set; }
+        public virtual DbSet<CompanyInfo> CompanyInfoes { get; set; }
+        public virtual DbSet<ContactInfo> ContactInfoes { get; set; }
+        public virtual DbSet<QuickLink> QuickLinks { get; set; }
+        public virtual DbSet<TeamInfo> TeamInfoes { get; set; }
+        public virtual DbSet<Office> Offices { get; set; }
     }
 }

@@ -21,8 +21,6 @@
     <link rel="stylesheet" href="~/wwwroot/css/owl.theme.default.min.css">
 
 
-    <link rel="stylesheet" href="~/wwwroot/css/aos.css">
-
     <link rel="stylesheet" href="~/wwwroot/css/style.css">
 
 </head>
@@ -76,24 +74,27 @@
         
 
         <!-----------------------------FOOTER ----------------------------->
-        <footer class="site-footer">
-            <div class="container">
-                <div class="row">
-                    @{Html.RenderAction("getFooter", "Home");}
-                </div>
+    <footer class="site-footer">
+        <div class="container">
+            <div class="row">
+                @{Html.RenderAction("getFooterAboutUs", "Home"); }
+                @{Html.RenderAction("getFooterQuickLink", "Home"); }
+                @{Html.RenderAction("getFooterContactInfo", "Home"); }
+            </div>
 
-                <div class="row pt-5 mt-5 text-center">
-                    <div class="col-md-12">
-                        <p>
-                            Copyright &copy;
-                            <script>document.write(new Date().getFullYear());</script> Nhóm CN .NET
-                            <i class="icon-heart" aria-hidden="true"></i> by <a href="#" target="_blank" class="text-primary">Lý An, MeSa, Công Chánh</a>
-                        </p>
-                    </div>
+            <div class="row pt-5 mt-5 text-center">
+                <div class="col-md-12">
+                    <p>
+                        Copyright &copy;
+                        <script>document.write(new Date().getFullYear());</script> Nhóm CN .NET
+                        <i class="icon-heart" aria-hidden="true"></i> by 
+                        <a href="#" target="_blank" class="text-primary">Lý An, MeSa, Công Chánh</a>
+                    </p>
                 </div>
 
             </div>
-        </footer>
+        </div>
+    </footer>
     </div>
 
     <script src="~/wwwroot/js/jquery-3.3.1.min.js"></script>
@@ -102,7 +103,6 @@
     <script src="~/wwwroot/js/bootstrap.min.js"></script>
     <script src="~/wwwroot/js/owl.carousel.min.js"></script>
     <script src="~/wwwroot/js/jquery.magnific-popup.min.js"></script>
-    <script src="~/wwwroot/js/aos.js"></script>
 
     <script src="~/wwwroot/js/main.js"></script>
 

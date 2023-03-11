@@ -9,7 +9,7 @@ namespace Pharmacy.Controllers
 {
     public class HomeController : Controller
     {
-        PharmacyEntities3 _db = new PharmacyEntities3();
+        PharmacyEntities _db = new PharmacyEntities();
         public ActionResult Index()
         {
             return View();
@@ -24,12 +24,37 @@ namespace Pharmacy.Controllers
             return PartialView(v.ToList());
         }
 
-        public ActionResult getFooter()
+        public ActionResult getHomeBanner()
         {
-            var v = from t in _db.Footers
-                    where t.hide == true
-                    orderby t.column ascending, t.order ascending
-                    select t;
+            var v = from b in _db.Banners
+                    where b.page == "HOME" && b.hide == true && b.order == 1
+                    select b;
+            return PartialView(v.FirstOrDefault());
+        }
+
+        public ActionResult getFooterAboutUs()
+        {
+            var v = from ci in _db.CompanyInfoes
+                    where ci.tittle == "About Us" && ci.hide == true
+                    select ci;
+            return PartialView(v.FirstOrDefault());
+        }
+
+        public ActionResult getFooterQuickLink()
+        {
+            var v = from ql in _db.QuickLinks
+                    where ql.hide == true
+                    orderby ql.order ascending
+                    select ql;
+            return PartialView(v.ToList());
+        }
+
+        public ActionResult getFooterContactInfo()
+        {
+            var v = from ci in _db.ContactInfoes
+                    where ci.hide == true
+                    orderby ci.order ascending
+                    select ci;
             return PartialView(v.ToList());
         }
 
