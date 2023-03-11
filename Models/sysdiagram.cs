@@ -12,15 +12,12 @@ namespace Pharmacy.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Footer
+    public partial class sysdiagram
     {
-        public int id { get; set; }
-        public string content { get; set; }
-        public string note { get; set; }
-        public Nullable<int> column { get; set; }
-        public Nullable<int> order { get; set; }
-        public Nullable<bool> hide { get; set; }
-        public string meta { get; set; }
-        public Nullable<System.DateTime> datebegin { get; set; }
+        public string name { get; set; }
+        public int principal_id { get; set; }
+        public int diagram_id { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }

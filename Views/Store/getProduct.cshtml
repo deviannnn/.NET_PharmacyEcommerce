@@ -1,0 +1,15 @@
+﻿@model IEnumerable<Pharmacy.Models.Product>
+
+
+
+@foreach (var product in Model)
+{
+    <div class="col-sm-6 col-lg-4 text-center item mb-4">
+        <span class="tag">Sale</span>
+        <a href="@product.meta"> <img src="@product.img" alt="Image"></a>
+        <h3 class="text-dark"><a href="product.html">@product.name</a></h3>
+        <p class="price"><del>@product.salePrice</del> &mdash;@product.price </p>
+    </div>
+}
+
+

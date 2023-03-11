@@ -9,7 +9,7 @@ namespace Pharmacy.Controllers
 {
     public class HomeController : Controller
     {
-        PharmacyEntities _db = new PharmacyEntities();
+        PharmacyEntities3 _db = new PharmacyEntities3();
         public ActionResult Index()
         {
             return View();
