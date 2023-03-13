@@ -119,12 +119,11 @@ insert into QuickLink (name,meta,hide,[order],datebegin) values ('Vitamins','',1
 insert into QuickLink (name,meta,hide,[order],datebegin) values ('Diet &amp; Nutrition','',1,3,'2023-02-27')
 insert into QuickLink (name,meta,hide,[order],datebegin) values ('Tea &amp; Coffee','',1,4,'2023-02-27')
 
-
 go
 create table ContactInfo
 (
 	id int IDENTITY(1,1) PRIMARY KEY,
-	content nvarchar(50),
+	content nvarchar(MAX),
 	type nvarchar(50),
 	meta nvarchar(50),
 	hide bit,
