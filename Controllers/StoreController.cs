@@ -23,5 +23,13 @@ namespace Pharmacy.Controllers
                      select p).Take(6);
             return PartialView(v.ToList());
         }
+        public ActionResult Detail(long id)
+        {
+            var v = from t in _db.Products
+                    where t.id == id
+                    select t;
+            return View(v.FirstOrDefault());
+        }
+
     }
 }
