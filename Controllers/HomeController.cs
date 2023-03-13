@@ -58,6 +58,15 @@ namespace Pharmacy.Controllers
             return PartialView(v.ToList());
         }
 
+        public ActionResult getNews()
+        {
+            var v = (from n in _db.News
+                     where n.hide == true
+                     orderby n.datebegin descending, n.order ascending
+                     select n).Take(3);
+            return PartialView(v.ToList());
+        }
+
         public ActionResult getPopularProduct()
         {
             var v = (from p in _db.Products
@@ -67,13 +76,14 @@ namespace Pharmacy.Controllers
             return PartialView(v.ToList());
         }
 
-        public ActionResult getNews()
+        public ActionResult getNewProduct()
         {
-            var v = (from n in _db.News
-                     where n.hide == true
-                     orderby n.datebegin descending, n.order ascending
-                     select n).Take(3);
+            var v = (from p in _db.Products
+                     where p.hide == true
+                     orderby p.datebegin ascending
+                     select p).Take(4);
             return PartialView(v.ToList());
         }
+
     }
 }
