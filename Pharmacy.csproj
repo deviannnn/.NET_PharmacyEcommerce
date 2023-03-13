@@ -206,7 +206,6 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="wwwroot\css\aos.css" />
     <Content Include="wwwroot\css\bootstrap.min.css" />
     <Content Include="wwwroot\css\bootstrap\bootstrap-grid.css" />
     <Content Include="wwwroot\css\bootstrap\bootstrap-reboot.css" />
@@ -241,7 +240,6 @@
     <Content Include="wwwroot\images\shoe.png" />
     <Content Include="wwwroot\images\wave.svg" />
     <Content Include="wwwroot\images\women.jpg" />
-    <Content Include="wwwroot\js\aos.js" />
     <Content Include="wwwroot\js\bootstrap.min.js" />
     <Content Include="wwwroot\js\jquery-3.3.1.min.js" />
     <Content Include="wwwroot\js\jquery-ui.js" />
@@ -272,7 +270,6 @@
     <Content Include="wwwroot\fonts\icomoon\fonts\icomoon.ttf" />
     <Content Include="wwwroot\fonts\icomoon\fonts\icomoon.woff" />
     <Content Include="wwwroot\fonts\icomoon\selection.json" />
-    <Content Include="wwwroot\scss\.DS_Store" />
     <Content Include="wwwroot\scss\bootstrap\.DS_Store" />
     <Content Include="wwwroot\scss\bootstrap\bootstrap-grid.scss" />
     <Content Include="wwwroot\scss\bootstrap\bootstrap-reboot.scss" />
