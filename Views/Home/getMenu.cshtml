@@ -5,14 +5,14 @@
     {
         <li class=" @((menu.isDropdown == true) ? "has-children" : "") ">
 
-            <a href="@menu.meta">@menu.name</a>
+            <a href="/@menu.meta">@menu.name</a>
 
             @if (menu.isDropdown == true)
             {
                 <ul class="dropdown">
                     @foreach (var subMenu in menu.SubMenus)
                     {
-                        <li><a href="@subMenu.meta">@subMenu.name</a></li>
+                        <li><a href="/@subMenu.meta">@subMenu.name</a></li>
                     }
                 </ul>
             }

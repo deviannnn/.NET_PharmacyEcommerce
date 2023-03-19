@@ -19,6 +19,17 @@
           <Property Name="order" Type="int" />
           <Property Name="datebegin" Type="smalldatetime" />
         </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" />
+          <Property Name="meta" Type="nvarchar" MaxLength="50" />
+          <Property Name="hide" Type="bit" />
+          <Property Name="order" Type="int" />
+          <Property Name="datebegin" Type="smalldatetime" />
+        </EntityType>
         <EntityType Name="CompanyInfo">
           <Key>
             <PropertyRef Name="id" />
@@ -37,7 +48,7 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="content" Type="nvarchar" MaxLength="50" />
+          <Property Name="content" Type="nvarchar(max)" />
           <Property Name="type" Type="nvarchar" MaxLength="50" />
           <Property Name="meta" Type="nvarchar" MaxLength="50" />
           <Property Name="hide" Type="bit" />
@@ -87,15 +98,18 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="name" Type="nvarchar" MaxLength="50" />
           <Property Name="img" Type="nvarchar" MaxLength="50" />
-          <Property Name="isSale" Type="bit" />
           <Property Name="price" Type="int" />
-          <Property Name="salePrice" Type="int" />
+          <Property Name="description" Type="nvarchar(max)" />
+          <Property Name="ingredient" Type="nvarchar(max)" />
           <Property Name="quantity" Type="int" />
           <Property Name="purchase" Type="int" />
+          <Property Name="isSale" Type="bit" />
+          <Property Name="priceSale" Type="int" />
           <Property Name="meta" Type="nvarchar" MaxLength="50" />
           <Property Name="hide" Type="bit" />
           <Property Name="order" Type="int" />
           <Property Name="datebegin" Type="smalldatetime" />
+          <Property Name="id_category" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="QuickLink">
           <Key>
@@ -113,12 +127,12 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="id_menu" Type="int" Nullable="false" />
           <Property Name="name" Type="nvarchar" MaxLength="50" />
           <Property Name="meta" Type="nvarchar" MaxLength="50" />
           <Property Name="hide" Type="bit" />
           <Property Name="order" Type="int" />
           <Property Name="datebegin" Type="smalldatetime" />
+          <Property Name="id_menu" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="TeamInfo">
           <Key>
@@ -134,6 +148,18 @@
           <Property Name="order" Type="int" />
           <Property Name="datebegin" Type="smalldatetime" />
         </EntityType>
+        <Association Name="Product_idCategory_fk">
+          <End Role="Category" Type="Self.Category" Multiplicity="1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="id_category" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="SubMenu_idMenu_fk">
           <End Role="Menu" Type="Self.Menu" Multiplicity="1" />
           <End Role="SubMenu" Type="Self.SubMenu" Multiplicity="*" />
@@ -148,6 +174,7 @@
         </Association>
         <EntityContainer Name="PharmacyModelStoreContainer">
           <EntitySet Name="Banner" EntityType="Self.Banner" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CompanyInfo" EntityType="Self.CompanyInfo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ContactInfo" EntityType="Self.ContactInfo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Menu" EntityType="Self.Menu" Schema="dbo" store:Type="Tables" />
@@ -157,6 +184,10 @@
           <EntitySet Name="QuickLink" EntityType="Self.QuickLink" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SubMenu" EntityType="Self.SubMenu" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TeamInfo" EntityType="Self.TeamInfo" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="Product_idCategory_fk" Association="Self.Product_idCategory_fk">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
           <AssociationSet Name="SubMenu_idMenu_fk" Association="Self.SubMenu_idMenu_fk">
             <End Role="Menu" EntitySet="Menu" />
             <End Role="SubMenu" EntitySet="SubMenu" />
@@ -191,23 +222,6 @@
           <Property Name="order" Type="Int32" />
           <Property Name="datebegin" Type="DateTime" Precision="0" />
         </EntityType>
-        <EntityType Name="Product">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="img" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="isSale" Type="Boolean" />
-          <Property Name="price" Type="Int32" />
-          <Property Name="salePrice" Type="Int32" />
-          <Property Name="quantity" Type="Int32" />
-          <Property Name="purchase" Type="Int32" />
-          <Property Name="meta" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="hide" Type="Boolean" />
-          <Property Name="order" Type="Int32" />
-          <Property Name="datebegin" Type="DateTime" Precision="0" />
-        </EntityType>
         <EntityType Name="SubMenu">
           <Key>
             <PropertyRef Name="id" />
@@ -236,7 +250,6 @@
         <EntityContainer Name="PharmacyEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Menus" EntityType="Self.Menu" />
           <EntitySet Name="News" EntityType="Self.News" />
-          <EntitySet Name="Products" EntityType="Self.Product" />
           <EntitySet Name="SubMenus" EntityType="Self.SubMenu" />
           <AssociationSet Name="SubMenu_idMenu_fk" Association="Self.SubMenu_idMenu_fk">
             <End Role="Menu" EntitySet="Menus" />
@@ -248,6 +261,12 @@
           <EntitySet Name="QuickLinks" EntityType="PharmacyModel.QuickLink" />
           <EntitySet Name="TeamInfoes" EntityType="PharmacyModel.TeamInfo" />
           <EntitySet Name="Offices" EntityType="PharmacyModel.Office" />
+          <EntitySet Name="Categories" EntityType="PharmacyModel.Category" />
+          <EntitySet Name="Products" EntityType="PharmacyModel.Product" />
+          <AssociationSet Name="Product_idCategory_fk" Association="PharmacyModel.Product_idCategory_fk">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="Product" EntitySet="Products" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Banner">
           <Key>
@@ -281,7 +300,7 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="content" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="meta" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="hide" Type="Boolean" />
@@ -325,6 +344,51 @@
           <Property Name="order" Type="Int32" />
           <Property Name="datebegin" Type="DateTime" Precision="0" />
         </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="meta" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="hide" Type="Boolean" />
+          <Property Name="order" Type="Int32" />
+          <Property Name="datebegin" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Products" Relationship="PharmacyModel.Product_idCategory_fk" FromRole="Category" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="img" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="price" Type="Int32" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ingredient" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="quantity" Type="Int32" />
+          <Property Name="purchase" Type="Int32" />
+          <Property Name="isSale" Type="Boolean" />
+          <Property Name="priceSale" Type="Int32" />
+          <Property Name="meta" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="hide" Type="Boolean" />
+          <Property Name="order" Type="Int32" />
+          <Property Name="datebegin" Type="DateTime" Precision="0" />
+          <Property Name="id_category" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Category" Relationship="PharmacyModel.Product_idCategory_fk" FromRole="Product" ToRole="Category" />
+        </EntityType>
+        <Association Name="Product_idCategory_fk">
+          <End Type="PharmacyModel.Category" Role="Category" Multiplicity="1" />
+          <End Type="PharmacyModel.Product" Role="Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="id_category" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -350,24 +414,6 @@
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="tittle" ColumnName="tittle" />
                 <ScalarProperty Name="content" ColumnName="content" />
-                <ScalarProperty Name="meta" ColumnName="meta" />
-                <ScalarProperty Name="hide" ColumnName="hide" />
-                <ScalarProperty Name="order" ColumnName="order" />
-                <ScalarProperty Name="datebegin" ColumnName="datebegin" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Products">
-            <EntityTypeMapping TypeName="PharmacyModel.Product">
-              <MappingFragment StoreEntitySet="Product">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="img" ColumnName="img" />
-                <ScalarProperty Name="isSale" ColumnName="isSale" />
-                <ScalarProperty Name="price" ColumnName="price" />
-                <ScalarProperty Name="salePrice" ColumnName="salePrice" />
-                <ScalarProperty Name="quantity" ColumnName="quantity" />
-                <ScalarProperty Name="purchase" ColumnName="purchase" />
                 <ScalarProperty Name="meta" ColumnName="meta" />
                 <ScalarProperty Name="hide" ColumnName="hide" />
                 <ScalarProperty Name="order" ColumnName="order" />
@@ -466,6 +512,39 @@
                 <ScalarProperty Name="meta" ColumnName="meta" />
                 <ScalarProperty Name="address" ColumnName="address" />
                 <ScalarProperty Name="location" ColumnName="location" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Categories">
+            <EntityTypeMapping TypeName="PharmacyModel.Category">
+              <MappingFragment StoreEntitySet="Category">
+                <ScalarProperty Name="datebegin" ColumnName="datebegin" />
+                <ScalarProperty Name="order" ColumnName="order" />
+                <ScalarProperty Name="hide" ColumnName="hide" />
+                <ScalarProperty Name="meta" ColumnName="meta" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Products">
+            <EntityTypeMapping TypeName="PharmacyModel.Product">
+              <MappingFragment StoreEntitySet="Product">
+                <ScalarProperty Name="id_category" ColumnName="id_category" />
+                <ScalarProperty Name="datebegin" ColumnName="datebegin" />
+                <ScalarProperty Name="order" ColumnName="order" />
+                <ScalarProperty Name="hide" ColumnName="hide" />
+                <ScalarProperty Name="meta" ColumnName="meta" />
+                <ScalarProperty Name="priceSale" ColumnName="priceSale" />
+                <ScalarProperty Name="isSale" ColumnName="isSale" />
+                <ScalarProperty Name="purchase" ColumnName="purchase" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="ingredient" ColumnName="ingredient" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="img" ColumnName="img" />
+                <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>

@@ -1,190 +1,228 @@
-go
-use master
-go
-drop database Pharmacy
-go
-create database Pharmacy
-go
-use Pharmacy
-go
-create table Menu
+﻿USE master
+GO
+IF exists( SELECT * FROM sysdatabases WHERE name='Pharmacy')
+	DROP DATABASE Pharmacy
+GO
+CREATE DATABASE Pharmacy
+GO
+USE Pharmacy
+GO
+CREATE TABLE Menu
 (
-	id int IDENTITY(1,1) PRIMARY KEY,
-	name nvarchar(50),
-	isDropdown bit,
-	meta nvarchar(50),
-	hide bit,
-	[order] int,
-	datebegin smalldatetime
+	[id] int IDENTITY(1,1) PRIMARY KEY,
+	[name] nvarchar(50) NULL,
+	[isDropdown] bit NULL,
+	[meta] nvarchar(50) NULL,
+	[hide] bit NULL,
+	[order] int NULL,
+	[datebegin] smalldatetime NULL
 )
-go
-insert into Menu (name,isDropdown,meta,hide,[order],datebegin) values ('HOME',0,'/Home',1,1,'2023-02-27')
-insert into Menu (name,isDropdown,meta,hide,[order],datebegin) values ('STORE',0,'/Store',1,2,'2023-02-27')
-insert into Menu (name,isDropdown,meta,hide,[order],datebegin) values ('CATEGORY',1,'',1,3,'2023-02-27')
-insert into Menu (name,isDropdown,meta,hide,[order],datebegin) values ('ABOUT',0,'/About',1,4,'2023-02-27')
-insert into Menu (name,isDropdown,meta,hide,[order],datebegin) values ('CONTACT',0,'/Contact',1,5,'2023-02-27')
+GO
+INSERT Menu ([name], [isDropdown], [meta], [hide], [order], [datebegin]) VALUES (N'Trang chủ',0,'trang-chu',1,1,'2023-03-03')
+INSERT Menu ([name], [isDropdown], [meta], [hide], [order], [datebegin]) VALUES (N'Sản Phẩm',0,'san-pham',1,2,'2023-03-03')
+INSERT Menu ([name], [isDropdown], [meta], [hide], [order], [datebegin]) VALUES (N'Danh mục',1,'',1,3,'2023-03-03')
+INSERT Menu ([name], [isDropdown], [meta], [hide], [order], [datebegin]) VALUES (N'Tin tức',0,'tin-tuc',1,4,'2023-03-03')
+INSERT Menu ([name], [isDropdown], [meta], [hide], [order], [datebegin]) VALUES (N'Hệ thống nhà thuốc',1,'',1,4,'2023-03-03')
+INSERT Menu ([name], [isDropdown], [meta], [hide], [order], [datebegin]) VALUES (N'Liên hệ',0,'lien-he',1,5,'2023-03-03')
 
 
-go
-create table SubMenu
+GO
+CREATE TABLE SubMenu
 (
-	id int IDENTITY(1,1) PRIMARY KEY ,
-	id_menu int not null,
-	name nvarchar(50),
-	meta nvarchar(50),
-	hide bit,
-	[order] int,
-	datebegin smalldatetime
+	[id] int IDENTITY(1,1) PRIMARY KEY ,
+	[name] nvarchar(50) NULL,
+	[meta] nvarchar(50) NULL,
+	[hide] bit NULL,
+	[order] int NULL,
+	[datebegin] smalldatetime NULL,
+	[id_menu] int NOT NULL
 	CONSTRAINT SubMenu_idMenu_fk FOREIGN KEY (id_menu) REFERENCES Menu(id)
 )
-go
-insert into SubMenu (id_menu,name,meta,hide,[order],datebegin) values (3,'Sup1','',1,1,'2023-02-27')
-insert into SubMenu (id_menu,name,meta,hide,[order],datebegin) values (3,'Vitamin','',1,2,'2023-02-27')
-insert into SubMenu (id_menu,name,meta,hide,[order],datebegin) values (3,'Diet & Nutrition','',1,3,'2023-02-27')
-insert into SubMenu (id_menu,name,meta,hide,[order],datebegin) values (3,'Tea & Coffee','',1,4,'2023-02-27')
+GO
+INSERT SubMenu ([name], [meta], [hide], [order], [datebegin], [id_menu]) VALUES (N'Dược phẩm','san-pham/duoc-pham',1,1,'2023-03-03',3)
+INSERT SubMenu ([name], [meta], [hide], [order], [datebegin], [id_menu]) VALUES (N'Thực phẩm chức năng','san-pham/thuc-pham-chuc-nang',1,2,'2023-03-03',3)
+INSERT SubMenu ([name], [meta], [hide], [order], [datebegin], [id_menu]) VALUES (N'Chăm sóc sức khoẻ','san-pham/cham-soc-suc-khoe',1,3,'2023-03-03',3)
+INSERT SubMenu ([name], [meta], [hide], [order], [datebegin], [id_menu]) VALUES (N'Chăm sóc cá nhân','san-pham/cham-soc-ca-nhan',1,4,'2023-03-03',3)
+INSERT SubMenu ([name], [meta], [hide], [order], [datebegin], [id_menu]) VALUES (N'Thiết bị y tế','san-pham/thiet-bi-y-te',1,4,'2023-03-03',3)
+INSERT SubMenu ([name], [meta], [hide], [order], [datebegin], [id_menu]) VALUES (N'Thông tin','thong-tin',1,4,'2023-03-03',5)
+INSERT SubMenu ([name], [meta], [hide], [order], [datebegin], [id_menu]) VALUES (N'Chi nhánh','chi-nhanh',1,4,'2023-03-03',5)
 
 
-go
-create table Product
+
+GO
+CREATE TABLE News
 (
-	id int IDENTITY(1,1) PRIMARY KEY,
-	name nvarchar(50),
-	img nvarchar(50),
-	isSale bit,
-	price int,
-	salePrice int,
-	quantity int,
-	purchase int,
-	meta nvarchar(50),
-	hide bit,
-	[order] int,
-	datebegin smalldatetime
+	[id] int IDENTITY(1,1) PRIMARY KEY,
+	[tittle] nvarchar(50) NULL,
+	[content] nvarchar(MAX) NULL,
+	[meta] nvarchar(50) NULL,
+	[hide] bit NULL,
+	[order] int NULL,
+	[datebegin] smalldatetime NULL
 )
-go
-insert into Product (name,img,isSale,price,salePrice,quantity,purchase,meta,hide,[order],datebegin) values ('Bioderma','../../wwwroot/images/product_01.png',1,95000,55000,1000,500,'',1,1,'2023/02/27')
-insert into Product (name,img,isSale,price,salePrice,quantity,purchase,meta,hide,[order],datebegin) values ('Chanca Piedra','../../wwwroot/images/product_02.png',0,0,120000,1000,100,'',1,2,'2023/02/27')
-insert into Product (name,img,isSale,price,salePrice,quantity,purchase,meta,hide,[order],datebegin) values ('Umcka Cold Care','../../wwwroot/images/product_03.png',0,0,70000,1000,200,'',1,3,'2023/02/27')
-insert into Product (name,img,isSale,price,salePrice,quantity,purchase,meta,hide,[order],datebegin) values ('Cetyl Pure','../../wwwroot/images/product_04.png',1,45000,20000,1000,400,'',1,4,'2023/02/27')
-insert into Product (name,img,isSale,price,salePrice,quantity,purchase,meta,hide,[order],datebegin) values ('CLA Core','../../wwwroot/images/product_05.png',0,0,38000,1000,480,'',1,5,'2023/02/27')
-insert into Product (name,img,isSale,price,salePrice,quantity,purchase,meta,hide,[order],datebegin) values ('Poo Pourri','../../wwwroot/images/product_06.png',1,89000,38000,1000,350,'',1,6,'2023/02/27')
+GO
+INSERT News ([tittle], [content], [meta], [hide], [order],[datebegin]) VALUES (N'Giao hàng nhanh chóng, miễn phí', N'Bạn đang cần thuốc nhưng ngại ra đường. Đừng lo, sản phẩm sẽ được giao tận nơi ...', 'tin-tuc', 1, 1, '2023-03-03')
+INSERT News ([tittle], [content], [meta], [hide], [order],[datebegin]) VALUES (N'Mùa giảm giá lên tới 50%', N'Từ 01/03/2023 đến 03/07/2023 Giảm giá một số sản phẩm sau ...', 'tin-tuc', 1, 2, '2023-03-03')
+INSERT News ([tittle], [content], [meta], [hide], [order],[datebegin]) VALUES (N'Sở hữu thẻ quà tặng', N'Khách hàng sẽ nhận được nhiều lợi ích hơn với thẻ quà tặng của chúng tôi ...', 'tin-tuc', 1, 3, '2023-03-03')
+INSERT News ([tittle], [content], [meta], [hide], [order],[datebegin]) VALUES (N'Hội viên & Quyền lợi', N'Hơn 1000 khách hàng đã trở thành Hội viên của Pharmacy và nhận ...', 'tin-tuc', 1, 4, '2023/02/28')
 
 
-go
-create table News
+GO
+CREATE TABLE Banner
 (
-	id int IDENTITY(1,1) PRIMARY KEY,
-	tittle nvarchar(50),
-	content nvarchar(MAX),
-	meta nvarchar(50),
-	hide bit,
-	[order] int,
-	datebegin smalldatetime
+	[id] int IDENTITY(1,1) PRIMARY KEY,
+	[tittle] nvarchar(50) NULL,
+	[content] nvarchar(MAX) NULL,
+	[page] nvarchar(50) NULL,
+	[img] nvarchar(50) NULL,
+	[meta] nvarchar(50) NULL,
+	[hide] bit NULL,
+	[order] int NULL,
+	[datebegin] smalldatetime NULL
 )
-go
-insert into News (tittle,content,meta,hide,[order],datebegin) values ('Free Shipping', 'Customer can be at home and medicine will be delivered to you','',1,1,'2023/02/27')
-insert into News (tittle,content,meta,hide,[order],datebegin) values ('Season Sale 50% Off', 'From 01/03/2023 to 07/03/2023 Some product sale','',1,2,'2023/02/27')
-insert into News (tittle,content,meta,hide,[order],datebegin) values ('Buy A Gift Card', 'Let get more benefits with our gift card','',1,3,'2023/02/27')
-insert into News (tittle,content,meta,hide,[order],datebegin) values ('Members & benefits', 'Approximate 10000 customers become Pharmacy member','',1,4,'2023/02/28')
+GO
+INSERT Banner ([tittle], [content], [page], [img], [meta], [hide], [order], [datebegin]) VALUES ('Welcome To Pharma', N'Thuốc Hiệu Quả, Thuốc Mới Mỗi Ngày.','HOME','hero_1.jpg','trang-chu',1,1,'2023/03/04')
+INSERT Banner ([tittle], [content], [page], [img], [meta], [hide], [order], [datebegin]) VALUES ('About Us', N'Tại Pharmacy, mỗi Dược sĩ luôn hết lòng phục vụ, rèn luyện để hoàn thành xuất sắc nhiệm vụ được giao.','ABOUT','hero_1.jpg','thong-tin',1,1,'2023/03/04')
 
-go
-create table Banner
+GO
+CREATE TABLE QuickLink
 (
-	id int IDENTITY(1,1) PRIMARY KEY,
-	tittle nvarchar(50),
-	content nvarchar(MAX),
-	page nvarchar(50),
-	img nvarchar(50),
-	meta nvarchar(50),
-	hide bit,
-	[order] int,
-	datebegin smalldatetime
+	[id] int IDENTITY(1,1) PRIMARY KEY,
+	[name] nvarchar(50) NULL,
+	[meta] nvarchar(50) NULL,
+	[hide] bit NULL,
+	[order] int NULL,
+	[datebegin] smalldatetime NULL
 )
-go
-insert into Banner (tittle,content,page,img,meta,hide,[order],datebegin) values ('Welcome To Pharma','Effective Medicine, New Medicine Everyday','HOME','../../wwwroot/images/hero_1.jpg','',1,1,'2023/03/04')
-insert into Banner (tittle,content,page,img,meta,hide,[order],datebegin) values ('About Us','At the Pharmacy, each Pharmacist is always dedicated to serving and trained to successfully complete the assigned tasks.','ABOUT','../../wwwroot/images/hero_1.jpg','/About/Index',1,1,'2023/03/04')
+GO
+INSERT QuickLink ([name], [meta], [hide], [order], [datebegin]) VALUES (N'Dược phẩm','san-pham/duoc-pham',1,1,'2023-03-03')
+INSERT QuickLink ([name], [meta], [hide], [order], [datebegin]) VALUES (N'Thực phẩm chức năng','san-pham/thuc-pham-chuc-nang',1,2,'2023-03-03')
+INSERT QuickLink ([name], [meta], [hide], [order], [datebegin]) VALUES (N'Chăm sóc sức khoẻ','san-pham/cham-soc-suc-khoe',1,3,'2023-03-03')
+INSERT QuickLink ([name], [meta], [hide], [order], [datebegin]) VALUES (N'Chăm sóc cá nhân','san-pham/cham-soc-ca-nhan',1,4,'2023-03-03')
+INSERT QuickLink ([name], [meta], [hide], [order], [datebegin]) VALUES (N'Thiết bị y tế','san-pham/thiet-bi-y-te',1,5,'2023-03-03')
+INSERT QuickLink ([name], [meta], [hide], [order], [datebegin]) VALUES (N'Chính sách giao hàng','chinh-sach-giao-hang',1,6,'2023-03-03')
+INSERT QuickLink ([name], [meta], [hide], [order], [datebegin]) VALUES (N'Chính sách đổi trả','chinh-sach-doi-tra',1,7,'2023-03-03')
+INSERT QuickLink ([name], [meta], [hide], [order], [datebegin]) VALUES (N'Chi nhánh Pharmacy','chi-nhanh',1,8,'2023-03-03')
 
-go
-create table QuickLink
+
+GO
+CREATE TABLE ContactInfo
 (
-	id int IDENTITY(1,1) PRIMARY KEY,
-	name nvarchar(50),
-	meta nvarchar(50),
-	hide bit,
-	[order] int,
-	datebegin smalldatetime
+	[id] int IDENTITY(1,1) PRIMARY KEY,
+	[content] nvarchar(MAX) NULL,
+	[type] nvarchar(50) NULL,
+	[meta] nvarchar(50) NULL,
+	[hide] bit NULL,
+	[order] int NULL,
+	[datebegin] smalldatetime NULL
 )
-go
-insert into QuickLink (name,meta,hide,[order],datebegin) values ('Supplements','',1,1,'2023-02-27')
-insert into QuickLink (name,meta,hide,[order],datebegin) values ('Vitamins','',1,2,'2023-02-27')
-insert into QuickLink (name,meta,hide,[order],datebegin) values ('Diet &amp; Nutrition','',1,3,'2023-02-27')
-insert into QuickLink (name,meta,hide,[order],datebegin) values ('Tea &amp; Coffee','',1,4,'2023-02-27')
+GO
+INSERT ContactInfo ([content], [type], [meta], [hide], [order], [datebegin]) VALUES (N'19 Nguyễn Hữu Thọ, Tân Hưng, Quận 7, Thành phố Hồ Chí Minh','address','https://GOo.gl/maps/dQwxg1MyK2wMUaNFA',1,1,'2023-03-03')
+INSERT ContactInfo ([content], [type], [meta], [hide], [order], [datebegin]) VALUES ('1800 1911','phone','tel:1800 1911',1,2,'2023-03-03')
+INSERT ContactInfo ([content], [type], [meta], [hide], [order], [datebegin]) VALUES ('pharmacy.contact@gmail.com','email','mailto:pharmacy.contact@gmail.com',1,3,'2023-03-03')
 
-go
-create table ContactInfo
+
+GO
+CREATE TABLE CompanyInfo
 (
-	id int IDENTITY(1,1) PRIMARY KEY,
-	content nvarchar(MAX),
-	type nvarchar(50),
-	meta nvarchar(50),
-	hide bit,
-	[order] int,
-	datebegin smalldatetime
+	[id] int IDENTITY(1,1) PRIMARY KEY,
+	[tittle] nvarchar(50) NULL,
+	[content] nvarchar(MAX) NULL,
+	[img] nvarchar(50) NULL,
+	[meta] nvarchar(50) NULL,
+	[hide] bit NULL,
+	[order] int NULL,
+	[datebegin] smalldatetime NULL
 )
-go
-insert into ContactInfo (content,type,meta,hide,[order],datebegin) values ('19 D. Nguyen Huu Tho, Tan Hung, District 7, Ho Chi Minh City, Vietnam','address','https://goo.gl/maps/dQwxg1MyK2wMUaNFA',1,1,'2023-02-27')
-insert into ContactInfo (content,type,meta,hide,[order],datebegin) values ('1800 1911','phone','tel:1800 1911',1,2,'2023-02-27')
-insert into ContactInfo (content,type,meta,hide,[order],datebegin) values ('pharmacy.contact@gmail.com','email','mailto:pharmacy.contact@gmail.com',1,3,'2023-02-27')
+GO
+INSERT CompanyInfo ([tittle], [content], [img], [meta], [hide], [order], [datebegin]) VALUES (N'Về Pharmacy',N'Tại Pharmacy, mỗi Dược sĩ luôn hết lòng phục vụ, rèn luyện để hoàn thành xuất sắc nhiệm vụ được giao.','','about',1,-1,'2023-03-03')
+INSERT CompanyInfo ([tittle], [content], [img], [meta], [hide], [order], [datebegin]) VALUES ('How We Started',N'Được thành lập vào năm 2023, Pharmacy là một trong những chuỗi bán lẻ dược phẩm đầu tiên tại Việt Nam. Đến nay, Nhà thuốc sở hữu mạng lưới hơn 200 nhà thuốc đạt GPP trên toàn quốc cùng đội ngũ hơn 2000 trình dược viên uy tín, cung cấp thuốc và sản phẩm chăm sóc sức khỏe hàng đầu với giá cạnh tranh nhất.','bg_1.jpg','',1,1,'2023-03-03')
+INSERT CompanyInfo ([tittle], [content], [img], [meta], [hide], [order], [datebegin]) VALUES ('We Are Trusted Company',N'Nhà thuốc luôn hướng tới mục tiêu nâng cao chất lượng chăm sóc sức khỏe cho từng khách hàng. Điều này trước đây chỉ nằm trong ý tưởng của DS.An – người sáng lập công ty, một dược sĩ đã làm việc nhiều năm tại Việt Nam. Bằng niềm đam mê và sự sáng tạo của mình, DS.An đã thành lập Nhà thuốc và mang đến những trải nghiệm tốt nhất cho khách hàng.','hero_1.jpg','',1,2,'2023-03-03')
 
 
-go
-create table CompanyInfo
+GO
+CREATE TABLE TeamInfo
 (
-	id int IDENTITY(1,1) PRIMARY KEY,
-	tittle nvarchar(50),
-	content nvarchar(MAX),
-	img nvarchar(50),
-	meta nvarchar(50),
-	hide bit,
-	[order] int,
-	datebegin smalldatetime
+	[id] int IDENTITY(1,1) PRIMARY KEY,
+	[name] nvarchar(50) NULL,
+	[role] nvarchar(50) NULL,
+	[description] nvarchar(MAX) NULL,
+	[img] nvarchar(50) NULL,
+	[meta] nvarchar(50) NULL,
+	[hide] bit NULL,
+	[order] int NULL,
+	[datebegin] smalldatetime NULL
 )
-go
-insert into CompanyInfo (tittle,content,img,meta,hide,[order],datebegin) values ('About Us','At the Pharmacy, each Pharmacist is always dedicated to serving and trained to successfully complete the assigned tasks.','','/About/Index',1,1,'2023-02-27')
-insert into CompanyInfo (tittle,content,img,meta,hide,[order],datebegin) values ('How We Started','Established in 2023, Pharmacy is one of the first pharmaceutical retail chains in Vietnam. To date, Pharmacy owns a network of more than 1,100 GPP-certified pharmacies nationwide and a team of more than 3,500 trusted pharmacists, providing leading medicines and healthcare products at the most competitive prices.','../../wwwroot/images/bg_1.jpg','',1,2,'2023-02-27')
-insert into CompanyInfo (tittle,content,img,meta,hide,[order],datebegin) values ('We Are Trusted Company','Pharmacy always aims to improve the quality of health care for each customer. This, previously, was only in the idea of Mr. An - the founder of the company, an pharmacist who worked for many years in Vietnam. With his passion and creativity, Mr.An founded Pharmacy and brings the best experiences to customers.','../../wwwroot/images/hero_1.jpg','',1,3,'2023-02-27')
+GO
+INSERT TeamInfo ([name], [role], [description], [img], [meta], [hide], [order], [datebegin]) VALUES (N'Lý Tuấn An',N'CEO/CO-FOUNDER',N'Anh sinh năm 2002 tại Thành phố Hồ Chí Minh, Việt Nam và tốt nghiệp ngành công nghệ phần mềm tại Đại học Tôn Đức Thắng năm 2024.','person_2.jpg','',1,1,'2023-03-03')
+INSERT TeamInfo ([name], [role], [description], [img], [meta], [hide], [order], [datebegin]) VALUES (N'Prean Mesa',N'CO-FOUNDER',N'Anh sinh năm 2002 tại Campuchia và tốt nghiệp ngành công nghệ phần mềm tại Đại học Tôn Đức Thắng năm 2024.','person_3.jpg','',1,2,'2023-03-03')
+INSERT TeamInfo ([name], [role], [description], [img], [meta], [hide], [order], [datebegin]) VALUES (N'Huỳnh Công Chánh',N'CO-FOUNDER',N'Anh sinh năm 2001 tại Trà Vinh, Việt Nam và tốt nghiệp ngành công nghệ phần mềm tại Đại học Tôn Đức Thắng năm 2023.','person_4.jpg','',1,3,'2023-03-03')
 
 
-go
-create table TeamInfo
+GO
+CREATE TABLE Office
 (
-	id int IDENTITY(1,1) PRIMARY KEY,
-	name nvarchar(50),
-	role nvarchar(50),
-	description nvarchar(MAX),
-	img nvarchar(50),
-	meta nvarchar(50),
-	hide bit,
-	[order] int,
-	datebegin smalldatetime
+	[id] int IDENTITY(1,1) PRIMARY KEY,
+	[location] nvarchar(50) NULL,
+	[address] nvarchar(150) NULL,
+	[meta] nvarchar(50) NULL,
+	[hide] bit NULL,
+	[order] int NULL,
+	[datebegin] smalldatetime NULL
 )
-go
-insert into TeamInfo (name,role,description,img,meta,hide,[order],datebegin) values ('Ly Tuan An','CEO/CO-FOUNDER','He was born in 2002 in Ho Chi Minh City, Vietnam and graduated in software engineering from Ton Duc Thang University in 2024.','../../wwwroot/images/person_2.jpg','',1,1,'2023/03/03')
-insert into TeamInfo (name,role,description,img,meta,hide,[order],datebegin) values ('Prean Mesa','CO-FOUNDER','He was born in 2002 in Cambodia and graduated in software engineering from Ton Duc Thang University in 2024.','../../wwwroot/images/person_3.jpg','',1,2,'2023/03/03')
-insert into TeamInfo (name,role,description,img,meta,hide,[order],datebegin) values ('Huynh Cong Chanh','CO-FOUNDER','He was born in 2001 in Ho Chi Minh City, Vietnam and graduated in software engineering from Ton Duc Thang University in 2023.','../../wwwroot/images/person_4.jpg','',1,3,'2023/03/03')
+GO
+INSERT Office ([location], [address], [meta], [hide], [order], [datebegin]) VALUES (N'Quận 8',N'175 Cao Xuân Dục, Phường 12, Quận 8, Thành phố Hồ Chí Minh','https://GOo.gl/maps/GVhs5ET7Bm3FXCzB9',1,1,'2023-03-03')
+INSERT Office ([location], [address], [meta], [hide], [order], [datebegin]) VALUES (N'Quận 7',N'139 Tôn Dật Tiên, Phường Tân Phong, Quận 7, Thành phố Hồ Chí Minh','https://GOo.gl/maps/CuqFiAMUm9CDfHbNA',1,2,'2023-03-03')
+INSERT Office ([location], [address], [meta], [hide], [order], [datebegin]) VALUES (N'Quận 1',N'22-36 Nguyễn Huệ, Phường Bến Nghé, Quận 1, Thành phố Hồ Chí Minh','https://GOo.gl/maps/L9coFpmgT9JJMGGa6',1,3,'2023-03-03')
 
 
-go
-create table Office
+GO
+CREATE TABLE Category
 (
-	id int IDENTITY(1,1) PRIMARY KEY,
-	location nvarchar(50),
-	address nvarchar(150),
-	meta nvarchar(50),
-	hide bit,
-	[order] int,
-	datebegin smalldatetime
+	[id] int IDENTITY(1,1) PRIMARY KEY,
+	[name] nvarchar(50) NULL,
+	[meta] nvarchar(50) NULL,
+	[hide] bit NULL,
+	[order] int NULL,
+	[datebegin] smalldatetime NULL
 )
-go
-insert into Office (location,address,meta,hide,[order],datebegin) values ('District 8','175 Cao Xuan Duc, Ward 12, District 8, Ho Chi Minh City, Vietnam','https://goo.gl/maps/GVhs5ET7Bm3FXCzB9',1,1,'2023/03/03')
-insert into Office (location,address,meta,hide,[order],datebegin) values ('District 7','139 Ton Dat Tien, Tan Phong, District 7, Ho Chi Minh City 700000, Vietnam','https://goo.gl/maps/CuqFiAMUm9CDfHbNA',1,2,'2023/03/03')
-insert into Office (location,address,meta,hide,[order],datebegin) values ('District 1','22-36 E. Nguyen Hue, Ben Nghe, District 1, Ho Chi Minh City, Vietnam','https://goo.gl/maps/L9coFpmgT9JJMGGa6',1,3,'2023/03/03')
+GO
+INSERT Category ([name], [meta], [hide], [order], [datebegin]) VALUES (N'Dược phẩm','duoc-pham',1,1,'2023-03-03')
+INSERT Category ([name], [meta], [hide], [order], [datebegin]) VALUES (N'Thực phẩm chức năng','thuc-pham-chuc-nang',1,2,'2023-03-03')
+INSERT Category ([name], [meta], [hide], [order], [datebegin]) VALUES (N'Chăm sóc sức khoẻ','cham-soc-suc-khoe',1,3,'2023-03-03')
+INSERT Category ([name], [meta], [hide], [order], [datebegin]) VALUES (N'Chăm sóc cá nhân','cham-soc-ca-nhan',1,4,'2023-03-03')
+INSERT Category ([name], [meta], [hide], [order], [datebegin]) VALUES (N'Thiết bị y tế','thiet-bi-y-te',1,4,'2023-03-03')
+
+
+GO
+CREATE TABLE Product
+(
+	[id] int IDENTITY(1,1) PRIMARY KEY,
+	[name] nvarchar(50) NULL,
+	[img] nvarchar(50) NULL,
+	[price] int NULL,
+	[description] nvarchar(MAX) NULL,
+	[ingredient] nvarchar(MAX) NULL,
+	[quantity] int NULL,
+	[purchase] int NULL,
+	[isSale] bit NULL,
+	[priceSale] int NULL,
+	[meta] nvarchar(50) NULL,
+	[hide] bit NULL,
+	[order] int NULL,
+	[datebegin] smalldatetime NULL,
+	[id_category] int NOT NULL
+	CONSTRAINT Product_idCategory_fk FOREIGN KEY (id_category) REFERENCES Category(id)
+)
+GO
+INSERT Product ([name], [img], [price], [description], [ingredient], [quantity], [purchase], [isSale], [priceSale], [meta], [hide], [order], [datebegin], [id_category]) VALUES (N'Dược phẩm 1','product_01.png',100000,N'Thực phẩm bảo vệ sức khỏe Solgar Vitamin C 500mg w Rose Hips giúp hỗ trợ tăng cường sức khỏe đề kháng.',N'Vitamin C(Axid Ascorbic) 500mg. Tầm xuân (Rose Hips) (Rosa Canina) (quả) 75mg.',1000,50,1,60000,'duoc-pham',1,1,'2023-03-03',1)
+INSERT Product ([name], [img], [price], [description], [ingredient], [quantity], [purchase], [isSale], [priceSale], [meta], [hide], [order], [datebegin], [id_category]) VALUES (N'Dược phẩm 2','product_02.png',200000,N'Thực phẩm bảo vệ sức khỏe Solgar Vitamin C 500mg w Rose Hips giúp hỗ trợ tăng cường sức khỏe đề kháng.',N'Vitamin C(Axid Ascorbic) 500mg. Tầm xuân (Rose Hips) (Rosa Canina) (quả) 75mg.',1000,500,0,0,'duoc-pham',1,2,'2023-03-03',1)
+INSERT Product ([name], [img], [price], [description], [ingredient], [quantity], [purchase], [isSale], [priceSale], [meta], [hide], [order], [datebegin], [id_category]) VALUES (N'Thực phẩm chức năng 1','product_03.png',300000,N'Thực phẩm bảo vệ sức khỏe Solgar Vitamin C 500mg w Rose Hips giúp hỗ trợ tăng cường sức khỏe đề kháng.',N'Vitamin C(Axid Ascorbic) 500mg. Tầm xuân (Rose Hips) (Rosa Canina) (quả) 75mg.',1000,700,0,0,'duoc-pham',1,3,'2023-03-18',2)
+INSERT Product ([name], [img], [price], [description], [ingredient], [quantity], [purchase], [isSale], [priceSale], [meta], [hide], [order], [datebegin], [id_category]) VALUES (N'Thực phẩm chức năng 2','product_04.png',400000,N'Thực phẩm bảo vệ sức khỏe Solgar Vitamin C 500mg w Rose Hips giúp hỗ trợ tăng cường sức khỏe đề kháng.',N'Vitamin C(Axid Ascorbic) 500mg. Tầm xuân (Rose Hips) (Rosa Canina) (quả) 75mg.',1000,500,0,0,'duoc-pham',1,4,'2023-03-11',2)
+INSERT Product ([name], [img], [price], [description], [ingredient], [quantity], [purchase], [isSale], [priceSale], [meta], [hide], [order], [datebegin], [id_category]) VALUES (N'Chăm sóc sức khoẻ 1','product_05.png',500000,N'Thực phẩm bảo vệ sức khỏe Solgar Vitamin C 500mg w Rose Hips giúp hỗ trợ tăng cường sức khỏe đề kháng.',N'Vitamin C(Axid Ascorbic) 500mg. Tầm xuân (Rose Hips) (Rosa Canina) (quả) 75mg.',1000,900,0,0,'duoc-pham',1,5,'2023-03-03',3)
+INSERT Product ([name], [img], [price], [description], [ingredient], [quantity], [purchase], [isSale], [priceSale], [meta], [hide], [order], [datebegin], [id_category]) VALUES (N'Chăm sóc sức khoẻ 2','product_06.png',600000,N'Thực phẩm bảo vệ sức khỏe Solgar Vitamin C 500mg w Rose Hips giúp hỗ trợ tăng cường sức khỏe đề kháng.',N'Vitamin C(Axid Ascorbic) 500mg. Tầm xuân (Rose Hips) (Rosa Canina) (quả) 75mg.',1000,600,1,20000,'duoc-pham',1,6,'2023-03-10',3)
+INSERT Product ([name], [img], [price], [description], [ingredient], [quantity], [purchase], [isSale], [priceSale], [meta], [hide], [order], [datebegin], [id_category]) VALUES (N'Chăm sóc cá nhân 1','product_01.png',700000,N'Thực phẩm bảo vệ sức khỏe Solgar Vitamin C 500mg w Rose Hips giúp hỗ trợ tăng cường sức khỏe đề kháng.',N'Vitamin C(Axid Ascorbic) 500mg. Tầm xuân (Rose Hips) (Rosa Canina) (quả) 75mg.',1000,500,0,0,'duoc-pham',1,7,'2023-03-19',4)
+INSERT Product ([name], [img], [price], [description], [ingredient], [quantity], [purchase], [isSale], [priceSale], [meta], [hide], [order], [datebegin], [id_category]) VALUES (N'Chăm sóc cá nhân 2','product_02.png',800000,N'Thực phẩm bảo vệ sức khỏe Solgar Vitamin C 500mg w Rose Hips giúp hỗ trợ tăng cường sức khỏe đề kháng.',N'Vitamin C(Axid Ascorbic) 500mg. Tầm xuân (Rose Hips) (Rosa Canina) (quả) 75mg.',1000,200,0,0,'duoc-pham',1,8,'2023-03-03',4)
+INSERT Product ([name], [img], [price], [description], [ingredient], [quantity], [purchase], [isSale], [priceSale], [meta], [hide], [order], [datebegin], [id_category]) VALUES (N'Thiết bị y tế 1','product_03.png',900000,N'Thực phẩm bảo vệ sức khỏe Solgar Vitamin C 500mg w Rose Hips giúp hỗ trợ tăng cường sức khỏe đề kháng.',N'Vitamin C(Axid Ascorbic) 500mg. Tầm xuân (Rose Hips) (Rosa Canina) (quả) 75mg.',1000,100,0,0,'duoc-pham',1,9,'2023-03-03',5)
+INSERT Product ([name], [img], [price], [description], [ingredient], [quantity], [purchase], [isSale], [priceSale], [meta], [hide], [order], [datebegin], [id_category]) VALUES (N'Thiết bị y tế 2','product_04.png',1000000,N'Thực phẩm bảo vệ sức khỏe Solgar Vitamin C 500mg w Rose Hips giúp hỗ trợ tăng cường sức khỏe đề kháng.',N'Vitamin C(Axid Ascorbic) 500mg. Tầm xuân (Rose Hips) (Rosa Canina) (quả) 75mg.',1000,500,1,60000,'duoc-pham',1,10,'2023-03-03',5)
+
