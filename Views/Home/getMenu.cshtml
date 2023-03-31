@@ -3,7 +3,7 @@
 <ul class="site-menu js-clone-nav d-none d-lg-block">
     @foreach (var menu in Model)
     {
-        <li class=" @((menu.isDropdown == true) ? "has-children" : "") ">
+        <li class=" @((menu.isDropdown == true) ? "has-children" : "active") ">
 
             <a href="/@menu.meta">@menu.name</a>
 
