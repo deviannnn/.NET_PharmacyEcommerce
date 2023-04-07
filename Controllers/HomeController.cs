@@ -26,64 +26,85 @@ namespace Pharmacy.Controllers
 
         public ActionResult getHomeBanner()
         {
-            var v = from b in _db.Banners
-                    where b.page == "HOME" && b.hide == true && b.order == 1
-                    select b;
+            var v = from t in _db.Banners
+                    where t.page == "HOME" && t.hide == true && t.order == 1
+                    select t;
             return PartialView(v.FirstOrDefault());
         }
 
         public ActionResult getFooterAboutUs()
         {
-            var v = from ci in _db.CompanyInfoes
-                    where ci.tittle == "About Us" && ci.hide == true
-                    select ci;
+            var v = from t in _db.CompanyInfoes
+                    where t.order == -1 && t.hide == true
+                    select t;
             return PartialView(v.FirstOrDefault());
         }
 
         public ActionResult getFooterQuickLink()
         {
-            var v = from ql in _db.QuickLinks
-                    where ql.hide == true
-                    orderby ql.order ascending
-                    select ql;
+            var v = from t in _db.QuickLinks
+                    where t.hide == true
+                    orderby t.order ascending
+                    select t;
             return PartialView(v.ToList());
         }
 
         public ActionResult getFooterContactInfo()
         {
-            var v = from ci in _db.ContactInfoes
-                    where ci.hide == true
-                    orderby ci.order ascending
-                    select ci;
+            var v = from t in _db.ContactInfoes
+                    where t.hide == true
+                    orderby t.order ascending
+                    select t;
             return PartialView(v.ToList());
         }
 
         public ActionResult getNews()
         {
-            var v = (from n in _db.News
-                     where n.hide == true
-                     orderby n.datebegin descending, n.order ascending
-                     select n).Take(3);
+            var v = (from t in _db.News
+                     where t.hide == true
+                     orderby t.datebegin descending, t.order ascending
+                     select t).Take(3);
             return PartialView(v.ToList());
         }
 
         public ActionResult getPopularProduct()
         {
-            var v = (from p in _db.Products
-                     where p.hide == true
-                     orderby p.purchase descending
-                     select p).Take(6);
-            return PartialView(v.ToList());
+            ViewBag.meta = "san-pham";
+            var v = (from t in _db.Products
+                     where t.hide == true
+                     orderby t.purchase descending
+                     select t).Take(6);
+            return PartialView("ProductList", v.ToList());
         }
 
         public ActionResult getNewProduct()
         {
-            var v = (from p in _db.Products
-                     where p.hide == true
-                     orderby p.datebegin ascending
-                     select p).Take(4);
+            ViewBag.meta = "san-pham";
+            var v = (from t in _db.Products
+                     where t.hide == true
+                     orderby t.datebegin ascending
+                     select t).Take(6);
+            return PartialView("ProductList", v.ToList());
+        }
+
+        public ActionResult getCategory()
+        {
+            ViewBag.meta = "san-pham";
+            var v = from t in _db.Categories
+                    where t.hide == true
+                    orderby t.order ascending
+                    select t;
             return PartialView(v.ToList());
         }
 
+        public ActionResult getProduct(int id, String metatittle)
+        {
+            ViewBag.meta = metatittle;
+            var v = from t in _db.Products
+                    where t.id_category == id && t.hide == true
+                    orderby t.order ascending
+                    select t;
+            return PartialView("ProductList", v.ToList());
+        }   
     }
 }

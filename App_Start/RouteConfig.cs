@@ -14,10 +14,55 @@ namespace Pharmacy
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
+                name: "Home",
+                url: "trang-chu",
+                defaults: new { controller = "Home", action = "Index" },
+                namespaces: new[] { "Pharmacy.Controllers" }
+            );
+
+            routes.MapRoute(
+                name: "About",
+                url: "thong-tin",
+                defaults: new { controller = "About", action = "Index" },
+                namespaces: new[] { "Pharmacy.Controllers" }
+            );
+
+            routes.MapRoute(
+                name: "Contact",
+                url: "lien-he",
+                defaults: new { controller = "Contact", action = "Index" },
+                namespaces: new[] { "Pharmacy.Controllers" }
+            );
+
+            routes.MapRoute(
+                name: "ProductDefault",
+                url: "san-pham",
+                defaults: new { controller = "Product", action = "Index" },
+                namespaces: new[] { "Pharmacy.Controllers" }
+            );
+
+            routes.MapRoute(
+                name: "Product",
+                url: "{type}/{meta}",
+                defaults: new { controller = "Product", action = "getByMeta", meta = UrlParameter.Optional },
+                constraints: new RouteValueDictionary { { "type", "san-pham" } },
+                namespaces: new[] { "Pharmacy.Controllers" }
+            );
+
+            routes.MapRoute(
+                name: "ProductDetail",
+                url: "{type}/{meta}/{id}",
+                defaults: new { controller = "Product", action = "Detail", id = UrlParameter.Optional },
+                constraints: new RouteValueDictionary { { "type", "san-pham" } },
+                namespaces: new[] { "Pharmacy.Controllers" }
+            );
+
+            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
+
         }
     }
 }

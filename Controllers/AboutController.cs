@@ -10,7 +10,6 @@ namespace Pharmacy.Controllers
     public class AboutController : Controller
     {
         PharmacyEntities _db = new PharmacyEntities();
-        // GET: About
         public ActionResult Index()
         {
             return View();

@@ -10,7 +10,6 @@ namespace Pharmacy.Controllers
     public class ContactController : Controller
     {
         PharmacyEntities _db = new PharmacyEntities();
-        // GET: Contact
         public ActionResult Index()
         {
             return View();
