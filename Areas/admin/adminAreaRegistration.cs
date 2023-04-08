@@ -1,4 +1,5 @@
 ﻿using System.Web.Mvc;
+using System.Xml.Linq;
 
 namespace Pharmacy.Areas.admin
 {
@@ -15,9 +16,9 @@ namespace Pharmacy.Areas.admin
         public override void RegisterArea(AreaRegistrationContext context) 
         {
             context.MapRoute(
-                "admin_default",
-                "admin/{controller}/{action}/{id}",
-                new { action = "Index", id = UrlParameter.Optional }
+                name: "admin_default",
+                url: "admin/{controller}/{action}/{id}",
+                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
         }
     }
