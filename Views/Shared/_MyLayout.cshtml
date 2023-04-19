@@ -21,7 +21,12 @@
     <link rel="stylesheet" href="~/wwwroot/css/owl.theme.default.min.css">
 
     <link rel="stylesheet" href="~/wwwroot/css/style.css">
-
+    <style>
+        .item img {
+            width: 270px;
+            height: 370px;
+        }
+    </style>
 </head>
 
 <body>
@@ -68,42 +73,52 @@
         </div>
 
         <!-- BODY -->
-        
+
         @RenderBody()
-        
+
 
         <!-----------------------------FOOTER ----------------------------->
-    <footer class="site-footer">
-        <div class="container">
-            <div class="row">
-                @{Html.RenderAction("getFooterAboutUs", "Home"); }
-                @{Html.RenderAction("getFooterQuickLink", "Home"); }
-                @{Html.RenderAction("getFooterContactInfo", "Home"); }
-            </div>
+        <footer class="site-footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 col-lg-3 mb-4 mb-lg-0">
+                        <div class="block-7">
 
-            <div class="row pt-5 mt-5 text-center">
-                <div class="col-md-12">
-                    <p>
-                        Copyright &copy;
-                        <script>document.write(new Date().getFullYear());</script> Nhóm CN .NET
-                        <i class="icon-heart" aria-hidden="true"></i> by 
-                        <a href="#" target="_blank" class="text-primary">Lý An, MeSa, Công Chánh</a>
-                    </p>
+                            <h3 class="footer-heading mb-4">Về Pharmacy</h3>
+                            <p>
+                                Tại Pharmacy, mỗi Dược sĩ luôn hết lòng phục vụ, rèn luyện để hoàn thành xuất sắc nhiệm vụ được giao.
+                            </p>
+                            <a href="/thong-tin-nha-thuoc" style="text-decoration: underline;">Tìm hiểu thêm</a>
+                        </div>
+                    </div>
+
+                    @{Html.RenderAction("getFooterQuickLink", "Home"); }
+                    @{Html.RenderAction("getFooterContactInfo", "Home"); }
                 </div>
 
+                <div class="row pt-5 mt-5 text-center">
+                    <div class="col-md-12">
+                        <p>
+                            Copyright &copy;
+                            <script>document.write(new Date().getFullYear());</script> Nhóm CN .NET
+                            <i class="icon-heart" aria-hidden="true"></i> by
+                            <a href="#" target="_blank" class="text-primary">Lý An, MeSa, Công Chánh</a>
+                        </p>
+                    </div>
+
+                </div>
             </div>
-        </div>
-    </footer>
+        </footer>
     </div>
 
-    <script src="../wwwroot/js/jquery-3.3.1.min.js"></script>
-    <script src="../wwwroot/js/jquery-ui.js"></script>
-    <script src="../wwwroot/js/popper.min.js"></script>
-    <script src="../wwwroot/js/bootstrap.min.js"></script>
-    <script src="../wwwroot/js/owl.carousel.min.js"></script>
-    <script src="../wwwroot/js/jquery.magnific-popup.min.js"></script>
+    <script src="../../wwwroot/js/jquery-3.3.1.min.js"></script>
+    <script src="../../wwwroot/js/jquery-ui.js"></script>
+    <script src="../../wwwroot/js/popper.min.js"></script>
+    <script src="../../wwwroot/js/bootstrap.min.js"></script>
+    <script src="../../wwwroot/js/owl.carousel.min.js"></script>
+    <script src="../../wwwroot/js/jquery.magnific-popup.min.js"></script>
 
-    <script src="../wwwroot/js/main.js"></script>
+    <script src="../../wwwroot/js/main.js"></script>
 
 </body>
 

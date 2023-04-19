@@ -7,10 +7,9 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12 mb-0">
-                <a href="/trang-chu">Trang chủ</a>
-                <span class="mx-2 mb-0">/</span>
-                <a href="/san-pham">Sản phẩm</a>
-                <span class="mx-2 mb-0">/</span>
+                <a href="/trang-chu">Trang chủ</a><span class="mx-2 mb-0">/</span>
+                <a href="/san-pham">Sản phẩm</a><span class="mx-2 mb-0">/</span>
+                <a href="/san-pham/@Model.Category.meta">@Model.Category.name</a><span class="mx-2 mb-0">/</span>
                 <strong class="text-black">@Model.name</strong>
             </div>
         </div>
@@ -22,7 +21,7 @@
         <div class="row">
             <div class="col-md-5 mr-auto">
                 <div class="border text-center">
-                    <img src="../../wwwroot/images/@Model.img" alt="Image" class="img-fluid p-5">
+                    <img src="~/wwwroot/upload/img/product/@Model.img" alt="Image" class="img-fluid p-5">
                 </div>
             </div>
             <div class="col-md-6">
@@ -33,9 +32,13 @@
                 <p>
                     @if (@Model.isSale == true)
                     {
-                        <del>@Model.priceSale</del>
+                        <del>@string.Format("{0:#,##0} VND", Model.price)</del>
+                        <strong class="text-primary h4">@string.Format("{0:#,##0} VND", Model.priceSale)</strong>
                     }
-                    <strong class="text-primary h4">@Model.price</strong>
+                    else
+                    {
+                        <strong class="text-primary h4">@string.Format("{0:#,##0} VND", Model.price)</strong>
+                    }
                 </p>
                 <div class="mb-5">
                     <div class="input-group mb-3" style="max-width: 220px;">
@@ -54,14 +57,9 @@
                 <div class="mt-5">
                     <ul class="nav nav-pills mb-3 custom-pill" id="pills-tab" role="tablist">
                         <li class="nav-item">
-                            <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab"
+                            <a class="nav-link" id="pills-home-tab" data-toggle="pill" role="tab"
                                aria-controls="pills-home" aria-selected="true">Thông tin sản phẩm</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab"
-                               aria-controls="pills-profile" aria-selected="false">Mô tả</a>
-                        </li>
-
                     </ul>
 
                     <div class="tab-content" id="pills-tabContent">
@@ -70,7 +68,7 @@
                                 <tbody>
                                     <tr>
                                         <td>Thành phần</td>
-                                        <td class="bg-light">@Model.ingredient</td>
+                                        <td class="bg-light">Lorem</td>
                                     </tr>
                                     <tr>
                                         <td>Hàm lượng</td>
@@ -86,31 +84,6 @@
                                     </tr>
                                 </tbody>
                             </table>
-                        </div>
-                        <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
-
-                            <table class="table custom-table">
-
-                                <tbody>
-                                    <tr>
-                                        <td>Chỉ định</td>
-                                        <td class="bg-light">Lorem lorem</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Chống chỉ định</td>
-                                        <td class="bg-light">Lorem lorem</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Liều dùng cách dùng</td>
-                                        <td class="bg-light">Lorem lorem</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Tác dụng phụ</td>
-                                        <td class="bg-light">Lorem lorem</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-
                         </div>
 
                     </div>

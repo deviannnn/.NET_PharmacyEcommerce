@@ -24,22 +24,6 @@ namespace Pharmacy.Controllers
             return PartialView(v.ToList());
         }
 
-        public ActionResult getHomeBanner()
-        {
-            var v = from t in _db.Banners
-                    where t.page == "HOME" && t.hide == true && t.order == 1
-                    select t;
-            return PartialView(v.FirstOrDefault());
-        }
-
-        public ActionResult getFooterAboutUs()
-        {
-            var v = from t in _db.CompanyInfoes
-                    where t.order == -1 && t.hide == true
-                    select t;
-            return PartialView(v.FirstOrDefault());
-        }
-
         public ActionResult getFooterQuickLink()
         {
             var v = from t in _db.QuickLinks
@@ -58,11 +42,21 @@ namespace Pharmacy.Controllers
             return PartialView(v.ToList());
         }
 
-        public ActionResult getNews()
+        public ActionResult getHomeBanner()
         {
+            var v = from t in _db.Banners
+                    where t.page == "HOME" && t.hide == true
+                    orderby t.order ascending, t.datebegin descending
+                    select t;
+            return PartialView(v.FirstOrDefault());
+        }
+
+        public ActionResult getHotNews()
+        {
+            ViewBag.meta = "tin-tuc";
             var v = (from t in _db.News
                      where t.hide == true
-                     orderby t.datebegin descending, t.order ascending
+                     orderby t.order ascending, t.datebegin descending 
                      select t).Take(3);
             return PartialView(v.ToList());
         }
@@ -82,7 +76,7 @@ namespace Pharmacy.Controllers
             ViewBag.meta = "san-pham";
             var v = (from t in _db.Products
                      where t.hide == true
-                     orderby t.datebegin ascending
+                     orderby t.datebegin descending
                      select t).Take(6);
             return PartialView("ProductList", v.ToList());
         }

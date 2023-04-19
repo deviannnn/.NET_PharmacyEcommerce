@@ -5,19 +5,19 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Sản Phẩm </title>
+    <title>Admin </title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Font Awesome -->
-    <link  rel="stylesheet" href="~/Areas/admin/wwwroot/plugins/fontawesome-free/css/all.min.css"/>
+    <link rel="stylesheet" href="~/Areas/admin/wwwroot/plugins/fontawesome-free/css/all.min.css" />
     <!-- Ionicons -->
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-    <!-- DataTables -->
-    <link rel="stylesheet" href="~/Areas/admin/wwwroot/plugins/datatables-bs4/css/dataTables.bootstrap4.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="~/Areas/admin/wwwroot/dist/css/adminlte.min.css">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+    @RenderSection("CSS", required: false)
 </head>
 
 <!-- Body Start -->
@@ -33,7 +33,7 @@
                     <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href="index.html" class="nav-link">Trang Chủ</a>
+                    <a href="@Url.Action("Index", "Home")" class="nav-link">Trang Chủ</a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
                     <a href="#" class="nav-link">Liên Hệ</a>
@@ -64,7 +64,7 @@
                         <a href="#" class="dropdown-item">
                             <!-- Message Start -->
                             <div class="media">
-                                <img src="../../dist/img/user1-128x128.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">
+                                <img src="~/Areas/admin/wwwroot/dist/img/user1-128x128.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">
                                 <div class="media-body">
                                     <h3 class="dropdown-item-title">
                                         Brad Diesel
@@ -80,7 +80,7 @@
                         <a href="#" class="dropdown-item">
                             <!-- Message Start -->
                             <div class="media">
-                                <img src="../../dist/img/user8-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
+                                <img src="~/Areas/admin/wwwroot/dist/img/user8-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
                                 <div class="media-body">
                                     <h3 class="dropdown-item-title">
                                         John Pierce
@@ -96,7 +96,7 @@
                         <a href="#" class="dropdown-item">
                             <!-- Message Start -->
                             <div class="media">
-                                <img src="../../dist/img/user3-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
+                                <img src="~/Areas/admin/wwwroot/dist/img/user3-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
                                 <div class="media-body">
                                     <h3 class="dropdown-item-title">
                                         Nora Silvester
@@ -150,8 +150,8 @@
         <!-- Main Sidebar Container -->
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
-            <a href="index.html" class="brand-link">
-                <img src="../../dist/img/AdminLTELogo.png" alt="Pharma Admin" class="brand-image img-circle elevation-3" style="opacity: .8">
+            <a href="@Url.Action("Index", "Home")" class="brand-link">
+                <img src="~/Areas/admin/wwwroot/dist/img/AdminLTELogo.png" alt="Pharma Admin" class="brand-image img-circle elevation-3" style="opacity: .8">
                 <span class="brand-text font-weight-light">Pharma Admin</span>
             </a>
 
@@ -160,7 +160,7 @@
                 <!-- Sidebar user (optional) -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                     <div class="image">
-                        <img src="../../dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+                        <img src="~/Areas/admin/wwwroot/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
                     </div>
                     <div class="info">
                         <a href="#" class="d-block">Admin</a>
@@ -170,59 +170,57 @@
                 <!-- Sidebar Menu -->
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                        <!-- Add icons to the links using the .nav-icon class
-                        with font-awesome or any other icon font library -->
-                        <!-- Quản lý bài viết -->
+                        <!-- Quản lý tin tức -->
                         <li class="nav-item has-treeview">
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-edit"></i>
                                 <p>
-                                    Quản lý bài viết
+                                    Quản lý tin tức
                                     <i class="right fas fa-angle-left"></i>
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="dangbaiviet.html" class="nav-link">
+                                    <a href="@Url.Action("Create", "News")" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Đăng bài viết<span class="right badge badge-danger">mới</span></p>
+                                        <p>Đăng tin tức<span class="right badge badge-danger">mới</span></p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="danhsachbaiviet.html" class="nav-link">
+                                    <a href="@Url.Action("Index", "News")" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Danh sách bài viết</p>
-                                        <!-- <span class="badge badge-info right">6</span> -->
+                                        <p>Danh sách tin tức</p>
                                     </a>
                                 </li>
                             </ul>
                         </li>
+
                         <!-- Quản lý sản phẩm -->
                         <li class="nav-item has-treeview">
-                            <a href="danhmucsanpham.html" class="nav-link">
-                                <i class="nav-icon fas fa-copy"></i>
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-bong"></i>
                                 <p>
-                                    Danh mục sản phẩm
+                                    Quản lý sản phẩm
                                     <i class="fas fa-angle-left right"></i>
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="nganhhang.html" class="nav-link">
+                                    <a href="@Url.Action("Index", "Categories")" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Ngành hàng</p>
+                                        <p>Danh mục sản phẩm</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="sanphammoi.html" class="nav-link">
+                                    <a href="@Url.Action("Create", "Products")" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Sản phẩm mới</p>
+                                        <p>Sản phẩm mới<span class="right badge badge-danger">mới</span></p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="sanpham.html" class="nav-link">
+                                    <a href="@Url.Action("Index", "Products")" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Sản phẩm</p>
+                                        <p>Danh sách sản phẩm</p>
                                     </a>
                                 </li>
                             </ul>
@@ -230,9 +228,9 @@
                         <!-- Quản lý hóa đơn -->
                         <li class="nav-item has-treeview">
                             <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-plus-square"></i>
+                                <i class="nav-icon fas fa-industry"></i>
                                 <p>
-                                    Quản lý
+                                    Quản lý đơn hàng
                                     <i class="fas fa-angle-left right"></i>
                                 </p>
                             </a>
@@ -267,54 +265,56 @@
                                         <p>Quản lý trả hàng</p>
                                     </a>
                                 </li>
-                                <li class="nav-item">
-                                    <a href="chinhanh.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Danh sách chi nhánh</p>
-                                    </a>
-                                </li>
                             </ul>
                         </li>
 
                         <!-- Page -->
                         <li class="nav-item has-treeview">
                             <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-book"></i>
+                                <i class="nav-icon fas fa-table"></i>
                                 <p>
-                                    Page
+                                    Quản lý trang chủ
                                     <i class="fas fa-angle-left right"></i>
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="login.html" class="nav-link">
+                                    <a href="@Url.Action("Index", "Menus")" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Login</p>
+                                        <p>Menu</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="register.html" class="nav-link">
+                                    <a href="@Url.Action("Footer", "Home")" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Register</p>
+                                        <p>Footer</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="forgot-password.html" class="nav-link">
+                                    <a href="@Url.Action("Index", "Banners")" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Forgot Password</p>
+                                        <p>Banner</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="@Url.Action("Index", "CompanyInfoes")" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Thông tin doanh nghiệp</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="@Url.Action("Index", "TeamInfoes")" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Thông tin thành viên</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="@Url.Action("Index", "Offices")" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Danh sách chi nhánh</p>
                                     </a>
                                 </li>
                             </ul>
-                        </li>
-                        <!-- Quản lý hóa đơn -->
-                        <!-- Quản lý Menu & Giao diện -->
-                        <li class="nav-item has-treeview">
-                            <a href="quanlymenu.html" class="nav-link">
-                                <i class="nav-icon fas fa-tree"></i>
-                                <p>
-                                    Quản lý Menu
-                                </p>
-                            </a>
                         </li>
                     </ul>
                 </nav>
@@ -338,30 +338,17 @@
         <!-- Footer End -->
     </div>
     <!-- ./wrapper -->
+
     <!-- jQuery -->
     <script src="~/Areas/admin/wwwroot/plugins/jquery/jquery.min.js"></script>
     <!-- Bootstrap 4 -->
     <script src="~/Areas/admin/wwwroot/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- DataTables -->
-    <script src="~/Areas/admin/wwwroot/plugins/datatables/jquery.dataTables.js"></script>
-    <script src="~/Areas/admin/wwwroot/plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
     <!-- AdminLTE App -->
     <script src="~/Areas/admin/wwwroot/dist/js/adminlte.min.js"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="~/Areas/admin/wwwroot/dist/js/demo.js"></script>
-    <!-- page script -->
-    <script>
-        $(function () {
-            $('#example2').DataTable({
-                "paging": true,
-                "lengthChange": false,
-                "searching": false,
-                "ordering": true,
-                "info": true,
-                "autoWidth": false,
-            });
-        });
-    </script>
+
+    @RenderSection("Scripts", required: false)
 
 </body>
 

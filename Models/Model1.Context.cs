@@ -25,16 +25,15 @@ namespace Pharmacy.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<Menu> Menus { get; set; }
         public virtual DbSet<News> News { get; set; }
-        public virtual DbSet<SubMenu> SubMenus { get; set; }
-        public virtual DbSet<Banner> Banners { get; set; }
-        public virtual DbSet<CompanyInfo> CompanyInfoes { get; set; }
+        public virtual DbSet<Product> Products { get; set; }
+        public virtual DbSet<Office> Offices { get; set; }
         public virtual DbSet<ContactInfo> ContactInfoes { get; set; }
         public virtual DbSet<QuickLink> QuickLinks { get; set; }
         public virtual DbSet<TeamInfo> TeamInfoes { get; set; }
-        public virtual DbSet<Office> Offices { get; set; }
-        public virtual DbSet<Category> Categories { get; set; }
-        public virtual DbSet<Product> Products { get; set; }
+        public virtual DbSet<CompanyInfo> CompanyInfoes { get; set; }
+        public virtual DbSet<Banner> Banners { get; set; }
     }
 }

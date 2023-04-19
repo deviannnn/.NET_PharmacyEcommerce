@@ -19,7 +19,6 @@ namespace Pharmacy.Models
         public string img { get; set; }
         public Nullable<int> price { get; set; }
         public string description { get; set; }
-        public string ingredient { get; set; }
         public Nullable<int> quantity { get; set; }
         public Nullable<int> purchase { get; set; }
         public Nullable<bool> isSale { get; set; }

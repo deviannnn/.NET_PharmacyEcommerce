@@ -17,27 +17,37 @@ namespace Pharmacy.Controllers
 
         public ActionResult getAboutBanner()
         {
-            var v = from b in _db.Banners
-                    where b.page == "ABOUT" && b.hide == true && b.order == 1
-                    select b;
+            var v = from t in _db.Banners
+                    where t.page == "ABOUT" && t.hide == true
+                    orderby t.order ascending, t.datebegin descending
+                    select t;
             return PartialView(v.FirstOrDefault());
         }
 
         public ActionResult getCompanyInfo()
         {
-            var v = from ci in _db.CompanyInfoes
-                    where ci.hide == true && ci.order > 0
-                    orderby ci.order ascending
-                    select ci;
+            var v = from t in _db.CompanyInfoes
+                    where t.hide == true && t.order > 0
+                    orderby t.order ascending
+                    select t;
             return PartialView(v.ToList());
         }
 
         public ActionResult getTeamInfo()
         {
-            var v = from ti in _db.TeamInfoes
-                    where ti.hide == true
-                    orderby ti.order ascending
-                    select ti;
+            var v = from t in _db.TeamInfoes
+                    where t.hide == true
+                    orderby t.order ascending
+                    select t;
+            return PartialView(v.ToList());
+        }
+
+        public ActionResult getOffice()
+        {
+            var v = from t in _db.Offices
+                    where t.hide == true
+                    orderby t.order descending
+                    select t;
             return PartialView(v.ToList());
         }
     }

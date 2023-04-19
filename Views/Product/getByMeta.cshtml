@@ -22,6 +22,22 @@
 <div class="site-section">
     <div class="container">
         <div class="row">
+            <div class="col-lg-6">
+                <h3 class="mb-3 h6 text-uppercase text-black d-block">Tìm kiếm theo danh mục</h3>
+                <button type="button" class="btn btn-secondary btn-md dropdown-toggle px-4" id="dropdownMenuReference"
+                        data-toggle="dropdown">
+                    Danh Mục
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuReference">
+                    @foreach (var category in ViewBag.Categories)
+                    {
+                        <a class="dropdown-item" href="/@ViewBag.meta/@category.meta">@category.name</a>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
 
             @Html.Action("getProduct", "Home", new { id = @Model.id, metatittle = @ViewBag.meta })
 

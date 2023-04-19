@@ -13,6 +13,11 @@ namespace Pharmacy.Controllers
         public ActionResult Index()
         {
             ViewBag.meta = "san-pham";
+            ViewBag.Categories = (from cate in _db.Categories
+                                  where cate.hide == true
+                                  orderby cate.order ascending
+                                  select cate).ToList();
+
             var v = from t in _db.Products
                     where t.hide == true
                     orderby t.order ascending
@@ -23,6 +28,11 @@ namespace Pharmacy.Controllers
         public ActionResult getByMeta(string meta)
         {
             ViewBag.meta = "san-pham";
+            ViewBag.Categories = (from cate in _db.Categories
+                                  where cate.hide == true
+                                  orderby cate.order ascending
+                                  select cate).ToList();
+
             var v = from t in _db.Categories
                     where t.meta == meta
                     select t;

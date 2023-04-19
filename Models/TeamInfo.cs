@@ -19,9 +19,9 @@ namespace Pharmacy.Models
         public string role { get; set; }
         public string description { get; set; }
         public string img { get; set; }
-        public string meta { get; set; }
         public Nullable<bool> hide { get; set; }
         public Nullable<int> order { get; set; }
         public Nullable<System.DateTime> datebegin { get; set; }
+        public string link { get; set; }
     }
 }

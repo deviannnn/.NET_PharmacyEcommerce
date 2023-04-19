@@ -17,7 +17,6 @@ namespace Pharmacy.Models
         public int id { get; set; }
         public string content { get; set; }
         public string type { get; set; }
-        public string meta { get; set; }
         public Nullable<bool> hide { get; set; }
         public Nullable<int> order { get; set; }
         public Nullable<System.DateTime> datebegin { get; set; }

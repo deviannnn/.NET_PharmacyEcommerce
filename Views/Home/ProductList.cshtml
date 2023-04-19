@@ -7,14 +7,18 @@
         {
             <span class="tag">Sale</span>
         }
-        <a href="/@ViewBag.meta/@product.meta/@product.id"> <img src="../../wwwroot/images/@product.img" alt="Image"></a>
+        <a href="/@ViewBag.meta/@product.meta/@product.id"> <img src="~/wwwroot/upload/img/product/@product.img" alt="Image"></a>
         <h3 class="text-dark"><a href="shop-single.html">@product.name</a></h3>
         <p class="price">
             @if (product.isSale == true)
             {
-                <del> @product.priceSale </del> <span>&nbsp;&#8212;&nbsp;</span>
+                <del>@string.Format("{0:#,##0} VND", product.price)</del><span>&nbsp;&#8212;&nbsp;</span>
+                @(string.Format("{0:#,##0} VND", product.priceSale))
             }
-            @product.price
+            else
+            {
+                @(string.Format("{0:#,##0} VND", product.price))
+            }
         </p>
     </div>
 }

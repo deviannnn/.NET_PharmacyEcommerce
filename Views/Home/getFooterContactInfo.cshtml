@@ -6,7 +6,7 @@
         <ul class="list-unstyled">
             @foreach (var contactinfo in Model)
             {
-                <li class="@contactinfo.type"><a href="/@contactinfo.meta">@contactinfo.content</a></li>
+                <li class="@contactinfo.type">@contactinfo.content</li>
             }
         </ul>
     </div>

@@ -128,10 +128,19 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\admin\adminAreaRegistration.cs" />
+    <Compile Include="Areas\admin\Controllers\BannersController.cs" />
+    <Compile Include="Areas\admin\Controllers\CategoriesController.cs" />
+    <Compile Include="Areas\admin\Controllers\ContactInfoesController.cs" />
     <Compile Include="Areas\admin\Controllers\HomeController.cs" />
+    <Compile Include="Areas\admin\Controllers\MenusController.cs" />
+    <Compile Include="Areas\admin\Controllers\NewsController.cs" />
+    <Compile Include="Areas\admin\Controllers\OfficesController.cs" />
+    <Compile Include="Areas\admin\Controllers\ProductsController.cs" />
+    <Compile Include="Areas\admin\Controllers\QuickLinksController.cs" />
     <Compile Include="Controllers\AboutController.cs" />
     <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\NewsController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -142,6 +151,7 @@
     <Compile Include="Models\Category.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Footer.cs" />
     <Compile Include="Models\CompanyInfo.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -176,9 +186,6 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\QuickLink.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\SubMenu.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TeamInfo.cs">
@@ -1874,11 +1881,15 @@
     <Content Include="wwwroot\js\owl.carousel.min.js" />
     <Content Include="wwwroot\js\popper.min.js" />
     <Content Include="wwwroot\js\slick.min.js" />
+    <Content Include="wwwroot\upload\img\banner\hero_1.jpg" />
+    <Content Include="wwwroot\upload\img\news\bg_1.jpg" />
+    <Content Include="wwwroot\upload\img\office\bg_1.jpg" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\admin\Data\" />
     <Folder Include="Assets\Client\" />
+    <Folder Include="wwwroot\upload\img\product\" />
   </ItemGroup>
   <ItemGroup>
     <EntityDeploy Include="Models\Model1.edmx">
@@ -1970,9 +1981,47 @@
     <Content Include="Areas\admin\wwwroot\plugins\summernote\summernote.js.map" />
     <Content Include="Areas\admin\wwwroot\plugins\sweetalert2-theme-bootstrap-4\bootstrap-4.scss" />
     <Content Include="Areas\admin\wwwroot\plugins\toastr\toastr.js.map" />
+    <Content Include="Areas\admin\Views\News\Create.cshtml" />
+    <Content Include="Areas\admin\Views\News\Delete.cshtml" />
+    <Content Include="Areas\admin\Views\News\Details.cshtml" />
+    <Content Include="Areas\admin\Views\News\Edit.cshtml" />
+    <Content Include="Areas\admin\Views\News\Index.cshtml" />
+    <Content Include="Areas\admin\Views\Products\Create.cshtml" />
+    <Content Include="Areas\admin\Views\Products\Delete.cshtml" />
+    <Content Include="Areas\admin\Views\Products\Details.cshtml" />
+    <Content Include="Areas\admin\Views\Products\Edit.cshtml" />
+    <Content Include="Areas\admin\Views\Products\Index.cshtml" />
+    <Content Include="Areas\admin\Views\Categories\Create.cshtml" />
+    <Content Include="Areas\admin\Views\Categories\Delete.cshtml" />
+    <Content Include="Areas\admin\Views\Categories\Details.cshtml" />
+    <Content Include="Areas\admin\Views\Categories\Edit.cshtml" />
+    <Content Include="Areas\admin\Views\Categories\Index.cshtml" />
+    <Content Include="Areas\admin\Views\Menus\Create.cshtml" />
+    <Content Include="Areas\admin\Views\Menus\Delete.cshtml" />
+    <Content Include="Areas\admin\Views\Menus\Details.cshtml" />
+    <Content Include="Areas\admin\Views\Menus\Edit.cshtml" />
+    <Content Include="Areas\admin\Views\Menus\Index.cshtml" />
+    <Content Include="Areas\admin\Views\Home\Footer.cshtml" />
+    <Content Include="Areas\admin\Views\QuickLinks\Create.cshtml" />
+    <Content Include="Areas\admin\Views\QuickLinks\Delete.cshtml" />
+    <Content Include="Areas\admin\Views\QuickLinks\Details.cshtml" />
+    <Content Include="Areas\admin\Views\QuickLinks\Edit.cshtml" />
+    <Content Include="Areas\admin\Views\ContactInfoes\Create.cshtml" />
+    <Content Include="Areas\admin\Views\ContactInfoes\Delete.cshtml" />
+    <Content Include="Areas\admin\Views\ContactInfoes\Details.cshtml" />
+    <Content Include="Areas\admin\Views\ContactInfoes\Edit.cshtml" />
+    <Content Include="Areas\admin\Views\Banners\Create.cshtml" />
+    <Content Include="Areas\admin\Views\Banners\Delete.cshtml" />
+    <Content Include="Areas\admin\Views\Banners\Details.cshtml" />
+    <Content Include="Areas\admin\Views\Banners\Edit.cshtml" />
+    <Content Include="Areas\admin\Views\Banners\Index.cshtml" />
+    <Content Include="Areas\admin\Views\Offices\Create.cshtml" />
+    <Content Include="Areas\admin\Views\Offices\Delete.cshtml" />
+    <Content Include="Areas\admin\Views\Offices\Details.cshtml" />
+    <Content Include="Areas\admin\Views\Offices\Edit.cshtml" />
+    <Content Include="Areas\admin\Views\Offices\Index.cshtml" />
     <None Include="packages.config" />
     <Content Include="Views\Home\getMenu.cshtml" />
-    <Content Include="Views\Home\getNews.cshtml" />
     <Content Include="Views\Shared\_MyLayout.cshtml" />
     <Content Include="wwwroot\css\bootstrap.min.css.map" />
     <Content Include="wwwroot\fonts\icomoon\fonts\icomoon.eot" />
@@ -2073,7 +2122,6 @@
     <Content Include="Views\About\Index.cshtml" />
     <Content Include="Views\Contact\getOffice.cshtml" />
     <Content Include="Views\Contact\Index.cshtml" />
-    <Content Include="Views\Home\getFooterAboutUs.cshtml" />
     <Content Include="Views\Home\getFooterContactInfo.cshtml" />
     <Content Include="Views\Home\getFooterQuickLink.cshtml" />
     <Content Include="Views\Home\getHomeBanner.cshtml" />
@@ -2082,6 +2130,11 @@
     <Content Include="Views\Product\Index.cshtml" />
     <Content Include="Views\Product\Detail.cshtml" />
     <Content Include="Views\Product\getByMeta.cshtml" />
+    <Content Include="Views\About\getOffice.cshtml" />
+    <Content Include="Views\News\Index.cshtml" />
+    <Content Include="Views\News\getNewsBanner.cshtml" />
+    <Content Include="Views\Home\getHotNews.cshtml" />
+    <Content Include="Views\News\Detail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
