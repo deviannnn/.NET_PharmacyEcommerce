@@ -75,7 +75,7 @@
                     <div class="col-3" style="align-self: end">
                         <div class="form-check">
                             @{
-                                bool hide = true;
+                                bool hide = Model.hide ?? false;
                             }
                             @Html.CheckBoxFor(model => hide, new { @class = "form-check-input" })
                             <label class="form-check-label" for="hide">Hiển thị</label>

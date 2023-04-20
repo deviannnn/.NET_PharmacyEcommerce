@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Data.Entity.Validation;
+using System.IO;
 using System.Linq;
 using System.Net;
+using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
 using Pharmacy.Models;
@@ -46,13 +49,40 @@ namespace Pharmacy.Areas.admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,location,address,img,link,hide,order,datebegin")] Office office)
+        public ActionResult Create([Bind(Include = "id,location,address,img,link,hide,order,datebegin")] Office office, HttpPostedFileBase img)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.Offices.Add(office);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                var path = "";
+                var filename = "";
+                if (ModelState.IsValid)
+                {
+                    if (img != null)
+                    {
+                        filename = DateTime.Now.ToString("dd-MM-yy-hh-mm-ss-") + img.FileName;
+                        path = Path.Combine(Server.MapPath("~/wwwroot/upload/img/office"), filename);
+                        img.SaveAs(path);
+                        office.img = filename;
+                    }
+                    else
+                    {
+                        office.img = "logo.png";
+                    }
+                    office.order = 1;
+                    office.datebegin = Convert.ToDateTime(DateTime.Now.ToShortDateString());
+
+                    db.Offices.Add(office);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+            }
+            catch (DbEntityValidationException e)
+            {
+                throw e;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
             }
 
             return View(office);
@@ -78,14 +108,43 @@ namespace Pharmacy.Areas.admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,location,address,img,link,hide,order,datebegin")] Office office)
+        public ActionResult Edit([Bind(Include = "id,location,address,img,link,hide,order,datebegin")] Office office, HttpPostedFileBase img)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.Entry(office).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                var path = "";
+                var filename = "";
+                Office temp = db.Offices.Find(office.id);
+                if (ModelState.IsValid)
+                {
+                    if (img != null)
+                    {
+                        filename = DateTime.Now.ToString("dd-MM-yy-hh-mm-ss-") + img.FileName;
+                        path = Path.Combine(Server.MapPath("~/wwwroot/upload/img/office"), filename);
+                        img.SaveAs(path);
+                        db.Entry(temp).Property(x => x.img).CurrentValue = filename;
+                    }
+                    temp.location = office.location;
+                    temp.address = office.address;
+                    temp.link = office.link;
+                    temp.hide = office.hide;
+                    temp.order = office.order;
+                    temp.datebegin = Convert.ToDateTime(DateTime.Now.ToShortDateString());
+
+                    db.Entry(temp).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
             }
+            catch (DbEntityValidationException e)
+            {
+                throw e;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
             return View(office);
         }
 

@@ -7,7 +7,7 @@
 @foreach (var office in Model)
 {
     <div class="col-md-6 col-lg-6 mb-5">
-        <a href="@office.link" class="banner-1 h-100 d-flex" style="background-image: url('../../wwwroot/images/@office.img');">
+        <a href="@office.link" class="banner-1 h-100 d-flex" style="background-image: url('../../wwwroot/upload/img/office/@office.img');">
             <div class="banner-1-inner @(count%2==1 ? "ml-auto" : "") align-self-center">
                 <h2>@office.location</h2>
                 <p>
