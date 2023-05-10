@@ -21,6 +21,10 @@
     <link rel="stylesheet" href="~/wwwroot/css/owl.theme.default.min.css">
 
     <link rel="stylesheet" href="~/wwwroot/css/style.css">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="~/Areas/admin/wwwroot/plugins/fontawesome-free/css/all.min.css" />
+
     <style>
         .item img {
             width: 270px;
@@ -35,20 +39,11 @@
 
         <div class="site-navbar py-2">
 
-            <div class="search-wrap">
-                <div class="container">
-                    <a href="#" class="search-close js-search-close"><span class="icon-close2"></span></a>
-                    <form action="#" method="post">
-                        <input type="text" class="form-control" placeholder="Search keyword and hit enter...">
-                    </form>
-                </div>
-            </div>
-
             <div class="container">
                 <div class="d-flex align-items-center justify-content-between">
                     <div class="logo">
                         <div class="site-logo">
-                            <a href="index.html" class="js-logo-clone">Pharma</a>
+                            <a href="/trang-chu" class="js-logo-clone">Pharma</a>
                         </div>
                     </div>
 
@@ -59,13 +54,34 @@
                     </div>
 
                     <div class="icons">
-                        <a href="#" class="icons-btn d-inline-block js-search-open"><span class="icon-search"></span></a>
-                        <a href="/cart.html" class="icons-btn d-inline-block bag">
-                            <span class="icon-shopping-bag"></span>
-                            <span class="number">2</span>
+                        <a class="nav-link d-inline-block" data-toggle="dropdown" href="">
+                            <i class="fas fa-user"></i>
                         </a>
-                        <a href="#" class="site-menu-toggle js-menu-toggle ml-3 d-inline-block d-lg-none">
-                            <span class="icon-menu"></span>
+                        <div class="dropdown-menu dropdown-menu-sm dropdown-menu-left">
+                            <a href="/dang-nhap" class="dropdown-item">
+                                <i class="fas fa-key mr-2"></i> Đăng nhập
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a href="/lich-su-dat-hang" class="dropdown-item">
+                                <i class="fas fa-clock mr-2"></i> Lịch sử đặt hàng
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a href="/doi-mat-khau" class="dropdown-item">
+                                <i class="fas fa-lock mr-2"></i> Đổi mật khẩu
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <form id="logoutForm" action="@Url.Action("Logout", "Account", new { area = "admin" })" method="post">
+                                @Html.AntiForgeryToken()
+
+                                <a href="" class="dropdown-item" onclick="document.getElementById('logoutForm').submit();">
+                                    <i class="fas fa-arrow-alt-circle-right mr-2"></i> Đăng xuất
+                                </a>
+                            </form>
+                        </div>
+
+                        <a href="/gio-hang" class="icons-btn d-inline-block bag">
+                            <span class="icon-shopping-bag"></span>
+                            <span class="number">0</span>
                         </a>
                     </div>
                 </div>

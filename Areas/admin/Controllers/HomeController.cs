@@ -7,6 +7,7 @@ using System.Web.Mvc;
 
 namespace Pharmacy.Areas.admin.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class HomeController : Controller
     {
         private PharmacyEntities db = new PharmacyEntities();

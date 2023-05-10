@@ -12,6 +12,7 @@ using Pharmacy.Models;
 
 namespace Pharmacy.Areas.admin.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class BannersController : Controller
     {
         private PharmacyEntities db = new PharmacyEntities();

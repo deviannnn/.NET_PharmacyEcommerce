@@ -130,6 +130,7 @@
     <Compile Include="Areas\admin\adminAreaRegistration.cs" />
     <Compile Include="Areas\admin\Controllers\BannersController.cs" />
     <Compile Include="Areas\admin\Controllers\CategoriesController.cs" />
+    <Compile Include="Areas\admin\Controllers\CompanyInfoesController.cs" />
     <Compile Include="Areas\admin\Controllers\ContactInfoesController.cs" />
     <Compile Include="Areas\admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\admin\Controllers\MenusController.cs" />
@@ -137,13 +138,19 @@
     <Compile Include="Areas\admin\Controllers\OfficesController.cs" />
     <Compile Include="Areas\admin\Controllers\ProductsController.cs" />
     <Compile Include="Areas\admin\Controllers\QuickLinksController.cs" />
+    <Compile Include="Areas\admin\Controllers\TeamInfoesController.cs" />
     <Compile Include="Controllers\AboutController.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\NewsController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Account.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Banner.cs">
       <DependentUpon>Model1.tt</DependentUpon>
@@ -180,6 +187,12 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Office.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Order.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OrdersDetail.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Product.cs">
@@ -1837,7 +1850,6 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="wwwroot\css\bootstrap.min.css" />
     <Content Include="wwwroot\css\bootstrap\bootstrap-grid.css" />
@@ -1882,8 +1894,15 @@
     <Content Include="wwwroot\js\popper.min.js" />
     <Content Include="wwwroot\js\slick.min.js" />
     <Content Include="wwwroot\upload\img\banner\hero_1.jpg" />
+    <Content Include="wwwroot\upload\img\companyinfo\bg_1.jpg" />
+    <Content Include="wwwroot\upload\img\companyinfo\hero_1.jpg" />
     <Content Include="wwwroot\upload\img\news\bg_1.jpg" />
     <Content Include="wwwroot\upload\img\office\bg_1.jpg" />
+    <Content Include="wwwroot\upload\img\teaminfo\person_1.jpg" />
+    <Content Include="wwwroot\upload\img\teaminfo\person_2.jpg" />
+    <Content Include="wwwroot\upload\img\teaminfo\person_3.jpg" />
+    <Content Include="wwwroot\upload\img\teaminfo\person_4.jpg" />
+    <Content Include="wwwroot\upload\img\teaminfo\person_5.jpg" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -2020,6 +2039,16 @@
     <Content Include="Areas\admin\Views\Offices\Details.cshtml" />
     <Content Include="Areas\admin\Views\Offices\Edit.cshtml" />
     <Content Include="Areas\admin\Views\Offices\Index.cshtml" />
+    <Content Include="Areas\admin\Views\CompanyInfoes\Create.cshtml" />
+    <Content Include="Areas\admin\Views\CompanyInfoes\Delete.cshtml" />
+    <Content Include="Areas\admin\Views\CompanyInfoes\Details.cshtml" />
+    <Content Include="Areas\admin\Views\CompanyInfoes\Edit.cshtml" />
+    <Content Include="Areas\admin\Views\CompanyInfoes\Index.cshtml" />
+    <Content Include="Areas\admin\Views\TeamInfoes\Create.cshtml" />
+    <Content Include="Areas\admin\Views\TeamInfoes\Delete.cshtml" />
+    <Content Include="Areas\admin\Views\TeamInfoes\Details.cshtml" />
+    <Content Include="Areas\admin\Views\TeamInfoes\Edit.cshtml" />
+    <Content Include="Areas\admin\Views\TeamInfoes\Index.cshtml" />
     <None Include="packages.config" />
     <Content Include="Views\Home\getMenu.cshtml" />
     <Content Include="Views\Shared\_MyLayout.cshtml" />
@@ -2135,6 +2164,10 @@
     <Content Include="Views\News\getNewsBanner.cshtml" />
     <Content Include="Views\Home\getHotNews.cshtml" />
     <Content Include="Views\News\Detail.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Account\ForgotPassword.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Cart\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />

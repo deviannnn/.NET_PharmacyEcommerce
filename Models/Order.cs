@@ -12,30 +12,27 @@ namespace Pharmacy.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Product
+    public partial class Order
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Product()
+        public Order()
         {
             this.OrdersDetails = new HashSet<OrdersDetail>();
         }
     
         public int id { get; set; }
         public string name { get; set; }
-        public string img { get; set; }
-        public Nullable<int> price { get; set; }
-        public string description { get; set; }
-        public Nullable<int> quantity { get; set; }
-        public Nullable<int> purchase { get; set; }
-        public Nullable<bool> isSale { get; set; }
-        public Nullable<int> priceSale { get; set; }
-        public string meta { get; set; }
-        public Nullable<bool> hide { get; set; }
-        public Nullable<int> order { get; set; }
-        public Nullable<System.DateTime> datebegin { get; set; }
-        public int id_category { get; set; }
+        public string phone { get; set; }
+        public string address { get; set; }
+        public string ward { get; set; }
+        public string district { get; set; }
+        public string city { get; set; }
+        public Nullable<System.DateTime> datecreate { get; set; }
+        public int total_amount { get; set; }
+        public int status { get; set; }
+        public int id_account { get; set; }
     
-        public virtual Category Category { get; set; }
+        public virtual Account Account { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrdersDetail> OrdersDetails { get; set; }
     }

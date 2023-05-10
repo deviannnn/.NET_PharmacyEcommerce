@@ -20,6 +20,10 @@
     <div class="container">
         <div class="row">
             <div class="col-md-5 mr-auto">
+                @if (@Model.isSale == true)
+                {
+                    <span class="tag">Sale</span>
+                }
                 <div class="border text-center">
                     <img src="~/wwwroot/upload/img/product/@Model.img" alt="Image" class="img-fluid p-5">
                 </div>
@@ -33,6 +37,7 @@
                     @if (@Model.isSale == true)
                     {
                         <del>@string.Format("{0:#,##0} VND", Model.price)</del>
+                        <span>&nbsp;&#8212;&nbsp;</span>
                         <strong class="text-primary h4">@string.Format("{0:#,##0} VND", Model.priceSale)</strong>
                     }
                     else
@@ -53,43 +58,6 @@
                     </div>
                 </div>
                 <p><a href="#" class="buy-now btn btn-sm height-auto px-4 py-3 btn-primary">Thêm vào giỏ hàng</a></p>
-
-                <div class="mt-5">
-                    <ul class="nav nav-pills mb-3 custom-pill" id="pills-tab" role="tablist">
-                        <li class="nav-item">
-                            <a class="nav-link" id="pills-home-tab" data-toggle="pill" role="tab"
-                               aria-controls="pills-home" aria-selected="true">Thông tin sản phẩm</a>
-                        </li>
-                    </ul>
-
-                    <div class="tab-content" id="pills-tabContent">
-                        <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-                            <table class="table custom-table">
-                                <tbody>
-                                    <tr>
-                                        <td>Thành phần</td>
-                                        <td class="bg-light">Lorem</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Hàm lượng</td>
-                                        <td class="bg-light">Lorem lorem</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Công dụng</td>
-                                        <td class="bg-light">Lorem lorem</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Cách sử dụng</td>
-                                        <td class="bg-light">Lorem lorem</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-
-                    </div>
-                </div>
-
-
             </div>
         </div>
     </div>

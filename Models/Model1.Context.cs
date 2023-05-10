@@ -35,5 +35,8 @@ namespace Pharmacy.Models
         public virtual DbSet<TeamInfo> TeamInfoes { get; set; }
         public virtual DbSet<CompanyInfo> CompanyInfoes { get; set; }
         public virtual DbSet<Banner> Banners { get; set; }
+        public virtual DbSet<Account> Accounts { get; set; }
+        public virtual DbSet<Order> Orders { get; set; }
+        public virtual DbSet<OrdersDetail> OrdersDetails { get; set; }
     }
 }

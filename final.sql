@@ -54,7 +54,7 @@ CREATE TABLE Product
 	[price] int NULL,
 	[description] nvarchar(max) NULL,
 	[quantity] int NULL,
-	[purchase] int NULL,
+	[purchase] int NULL,-- lượt mua 
 	[isSale] bit NULL,
 	[priceSale] int NULL,
 	[meta] nvarchar(max) NULL,
@@ -211,3 +211,61 @@ INSERT Office ([location], [address], [img], [link], [hide], [order], [datebegin
 (N'Quận 8',N'175 Cao Xuân Dục, Phường 12, Quận 8, Thành phố Hồ Chí Minh','bg_1.jpg','https://GOo.gl/maps/GVhs5ET7Bm3FXCzB9',1,1,'2023-03-03'),
 (N'Quận 7',N'139 Tôn Dật Tiên, Phường Tân Phong, Quận 7, Thành phố Hồ Chí Minh','bg_1.jpg','https://GOo.gl/maps/CuqFiAMUm9CDfHbNA',1,2,'2023-03-03'),
 (N'Quận 1',N'22-36 Nguyễn Huệ, Phường Bến Nghé, Quận 1, Thành phố Hồ Chí Minh','bg_1.jpg','https://GOo.gl/maps/L9coFpmgT9JJMGGa6',1,3,'2023-03-03')
+
+
+----------------------------------------- ACCOUNT -------------------------------------
+
+GO
+CREATE TABLE Account
+(
+	[id] int IDENTITY(1,1) PRIMARY KEY,
+	[email] nvarchar(150) NOT NULL,
+	[password] nvarchar(25) NOT NULL,
+	[role] int NOT NULL,
+	[permission] int NOT NULL
+)
+GO
+INSERT Account ([email], [password], [role], [permission]) VALUES
+('admin@gmail.com', '123123', '1', '2'),
+('user@gmail.com', '123123', '0', '1')
+
+
+GO
+CREATE TABLE Orders
+(
+	[id] int IDENTITY(1,1) PRIMARY KEY,
+	[name] nvarchar(100) NOT NULL,
+	[phone] nvarchar(20) NOT NULL,
+	[address] nvarchar(150) NOT NULL,
+	[ward] nvarchar(50) NULL,
+	[district] nvarchar(50) NULL,
+	[city] nvarchar(50) NULL,
+	[datecreate] smalldatetime NULL,
+	[total_amount] int NOT NULL,
+	[status] int NOT NULL,
+	[id_account] int NOT NULL
+	CONSTRAINT Orders_idAccount_fk FOREIGN KEY (id_account) REFERENCES Account(id)
+)
+INSERT ORDERS ([name], [phone], [address], [ward], [district], [city], [datecreate], [total_amount], [status], [id_account]) VALUES
+(N'Nguyễn Văn A', '0987654321', N'123 Nguyễn Hữu Thọ', N'Tân Hưng', '7', N'Hồ Chí Minh', '2023-05-01', 440000, 0, 2),
+(N'Nguyễn Văn B', '0969696969', N'169/87 Phan Văn Trị', N'3', N'Gò Vấp', N'Hồ Chí Minh', '2023-05-02', 1280000, 0, 2)
+
+
+GO
+CREATE TABLE OrdersDetail
+(
+	[id] int IDENTITY(1,1) PRIMARY KEY,
+	[quantity] int NOT NULL,
+	[price] int NOT NULL,
+	[amount] int NOT NULL,
+	[id_orders] int NOT NULL,
+	[id_product] int NOT NULL
+	CONSTRAINT OrdersDetail_idOrders_fk FOREIGN KEY (id_orders) REFERENCES Orders(id),
+	CONSTRAINT OrdersDetail_idProduct_fk FOREIGN KEY (id_product) REFERENCES Product(id)
+)
+INSERT OrdersDetail ([id_orders], [id_product], [quantity], [price], [amount]) VALUES
+(1, 1, 1, 40000, 40000),
+(1, 2, 2, 200000, 400000),
+(2, 3, 1, 300000, 300000),
+(2, 4, 1, 400000, 400000),
+(2, 5, 1, 580000, 580000)

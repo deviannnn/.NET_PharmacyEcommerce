@@ -35,6 +35,34 @@ namespace Pharmacy
             );
 
             routes.MapRoute(
+                name: "Cart",
+                url: "gio-hang",
+                defaults: new { controller = "Cart", action = "Index" },
+                namespaces: new[] { "Pharmacy.Controllers" }
+            );
+
+            routes.MapRoute(
+                name: "Login",
+                url: "dang-nhap",
+                defaults: new { controller = "Account", action = "Login" },
+                namespaces: new[] { "Pharmacy.Controllers" }
+            );
+
+            routes.MapRoute(
+                name: "Register",
+                url: "dang-ky",
+                defaults: new { controller = "Account", action = "Register" },
+                namespaces: new[] { "Pharmacy.Controllers" }
+            );
+
+            routes.MapRoute(
+                name: "ForgotPassword",
+                url: "quen-mat-khau",
+                defaults: new { controller = "Account", action = "ForgotPassword" },
+                namespaces: new[] { "Pharmacy.Controllers" }
+            );
+
+            routes.MapRoute(
                 name: "ProductDefault",
                 url: "san-pham",
                 defaults: new { controller = "Product", action = "Index" },
