@@ -226,8 +226,8 @@ CREATE TABLE Account
 )
 GO
 INSERT Account ([email], [password], [role], [permission]) VALUES
-('admin@gmail.com', '123123', '1', '2'),
-('user@gmail.com', '123123', '0', '1')
+('admin@gmail.com', '$2a$11$Y4YlkXwBhfSgAXXVH3bk5.kps4.YNXYgn8qqQCz53nYfimyuaFF0K', '1', '2'),
+('user@gmail.com', '$2a$11$Y4YlkXwBhfSgAXXVH3bk5.kps4.YNXYgn8qqQCz53nYfimyuaFF0K', '0', '1')
 
 
 GO
