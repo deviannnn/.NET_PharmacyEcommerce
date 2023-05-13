@@ -134,7 +134,7 @@ namespace Pharmacy.Controllers
         public ActionResult Logout()
         {
             FormsAuthentication.SignOut();
-            Session.Remove("CustomerId");
+            Session.Clear();
             return RedirectToAction("Login", "Account");
         }
 

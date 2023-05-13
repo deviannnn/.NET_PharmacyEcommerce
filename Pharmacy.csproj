@@ -2072,7 +2072,6 @@
     <Content Include="Areas\admin\Views\Accounts\Index.cshtml" />
     <Content Include="Areas\admin\Views\Orders\Details.cshtml" />
     <Content Include="Areas\admin\Views\Orders\Index.cshtml" />
-    <Content Include="Areas\admin\Views\Orders\Print.cshtml" />
     <Content Include="Areas\admin\Views\Orders\Confirm.cshtml" />
     <None Include="packages.config" />
     <Content Include="Views\Home\getMenu.cshtml" />
