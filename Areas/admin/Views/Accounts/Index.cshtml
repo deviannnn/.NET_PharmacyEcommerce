@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Pharmacy.Models.Product>
+﻿@model IEnumerable<Pharmacy.Models.Account>
 
 @{
     ViewBag.Title = "Index";
@@ -21,12 +21,12 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0 text-dark">Sản phẩm</h1>
+                <h1 class="m-0 text-dark">Khách hàng</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="/admin">Trang Chủ</a></li>
-                    <li class="breadcrumb-item active">Sản phẩm</li>
+                    <li class="breadcrumb-item active">Khách hàng</li>
                 </ol>
             </div>
         </div>
@@ -34,17 +34,13 @@
     <!-- /.container-fluid -->
 </section>
 <!-- /.content-header -->
-
 <!-- Main content -->
 <section class="content">
     <div class="row">
         <div class="col-12">
             <div class="card">
-                <!-- Card Header -->
                 <div class="card-header">
-                    <a href="@Url.Action("Create", "Products")" class="text-light">
-                        <button type="button" class="btn btn-success col-2">Thêm sản phẩm</button>
-                    </a>
+                    <h3 class="card-title">Danh sách khách hàng</h3>
                 </div>
                 <!-- Card Body -->
                 <div class="card-body">
@@ -59,14 +55,9 @@
                         <thead>
                             <tr>
                                 <th>STT</th>
-                                <th>Tên sản phẩm</th>
-                                <th>Ảnh đại diện</th>
-                                <th>Tồn kho</th>
-                                <th>Đơn giá (VND)</th>
-                                <th>Lượt mua</th>
-                                <th>Hiển thị</th>
-                                <th>Vị trí</th>
-                                <th>Ngày cập nhật</th>
+                                <th>Email</th>
+                                <th>Mật khẩu</th>
+                                <th>Quyền đặt hàng</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -79,33 +70,31 @@
                                         @Html.Raw(STT++)
                                     </td>
                                     <td style="text-align: start">
-                                        @Html.DisplayFor(modelItem => item.name)
-                                    </td>
-                                    <td style="padding: 7px">
-                                        <img src="~/wwwroot/upload/img/product/@item.img" style="width:100px; height: 100px" />
+                                        @Html.DisplayFor(modelItem => item.email)
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.quantity)
+                                        @Html.DisplayFor(modelItem => item.password)
                                     </td>
                                     <td>
-                                        @string.Format("{0:#,##0}", item.price)
+                                        @if (item.permission == 1)
+                                        {
+                                            <span class="text-success">Được phép</span>
+                                        }
+                                        else if (item.permission == 0)
+                                        {
+                                            <span class="text-danger">Bị chặn</span>
+                                        }
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.purchase)
-                                    </td>
-                                    <td>
-                                        @(item.hide.GetValueOrDefault(false) ? "Đang hiển thị" : "Đã ẩn")
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.order)
-                                    </td>
-                                    <td>
-                                        @(item.datebegin.HasValue ? item.datebegin.Value.ToString("dd/MM/yyyy") : "")
-                                    </td>
-                                    <td>
-                                        <a href="@Url.Action("Edit", "Products", new { id = item.id })"><button type="button" class="btn btn-block btn-sm btn-warning">Sửa</button></a>
-                                        <a href="@Url.Action("Details", "Products", new { id = item.id })"><button type="button" class="btn btn-block btn-sm btn-default">Chi tiết</button></a>
-                                        <a href="@Url.Action("Delete", "Products", new { id = item.id })"><button type="button" class="btn btn-block btn-sm btn-danger">Xóa</button></a>
+                                        @if (item.permission == 1)
+                                        {
+                                            <a href="@Url.Action("Block", "Accounts", new { id = item.id })"><button type="button" class="btn btn-danger">Chặn</button></a>
+
+                                        }
+                                        else if (item.permission == 0)
+                                        {
+                                            <a href="@Url.Action("UnBlock", "Accounts", new { id = item.id })"><button type="button" class="btn btn-primary">Gỡ chặn</button></a>
+                                        }
                                     </td>
                                 </tr>
                             }

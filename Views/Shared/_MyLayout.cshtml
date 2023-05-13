@@ -1,6 +1,8 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "_MyLayout";
+    var customerId = Session["CustomerId"] as int?;
+    var CartQuantity = Session["CartQuantity"] as int?;
+    int quantity = CartQuantity ?? 0;
 }
 
 <!DOCTYPE html>
@@ -30,6 +32,13 @@
             width: 270px;
             height: 370px;
         }
+
+        #alertCart {
+            padding: 10px;
+            border-radius: 5px;
+            position: absolute;
+            right: 200px;
+        }
     </style>
 </head>
 
@@ -54,35 +63,53 @@
                     </div>
 
                     <div class="icons">
-                        <a class="nav-link d-inline-block" data-toggle="dropdown" href="">
-                            <i class="fas fa-user"></i>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-sm dropdown-menu-left">
-                            <a href="/dang-nhap" class="dropdown-item">
-                                <i class="fas fa-key mr-2"></i> Đăng nhập
+                        @if (customerId != null)
+                        {
+                            <a class="nav-link d-inline-block" data-toggle="dropdown" href="">
+                                <i class="fas fa-user"></i>
+                                <i class="fas fa-check"></i>
                             </a>
-                            <div class="dropdown-divider"></div>
-                            <a href="/lich-su-dat-hang" class="dropdown-item">
-                                <i class="fas fa-clock mr-2"></i> Lịch sử đặt hàng
-                            </a>
-                            <div class="dropdown-divider"></div>
-                            <a href="/doi-mat-khau" class="dropdown-item">
-                                <i class="fas fa-lock mr-2"></i> Đổi mật khẩu
-                            </a>
-                            <div class="dropdown-divider"></div>
-                            <form id="logoutForm" action="@Url.Action("Logout", "Account", new { area = "admin" })" method="post">
-                                @Html.AntiForgeryToken()
-
-                                <a href="" class="dropdown-item" onclick="document.getElementById('logoutForm').submit();">
-                                    <i class="fas fa-arrow-alt-circle-right mr-2"></i> Đăng xuất
+                            <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right">
+                                <a href="/lich-su-dat-hang" class="dropdown-item">
+                                    <i class="fas fa-clock mr-2"></i> Lịch sử đặt hàng
                                 </a>
-                            </form>
-                        </div>
+                                <div class="dropdown-divider"></div>
+                                <a href="/doi-mat-khau" class="dropdown-item">
+                                    <i class="fas fa-lock mr-2"></i> Đổi mật khẩu
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <form id="logoutForm" action="@Url.Action("Logout", "Account")" method="post">
+                                    @Html.AntiForgeryToken()
+                                    <a class="dropdown-item" onclick="document.getElementById('logoutForm').submit();" style="cursor: pointer">
+                                        <i class="fas fa-arrow-alt-circle-right mr-2"></i> Đăng xuất
+                                    </a>
+                                </form>
+                            </div>
+                        }
+                        else
+                        {
+                            <a class="nav-link d-inline-block" data-toggle="dropdown" href="">
+                                <i class="fas fa-user"></i>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-sm dropdown-menu-left">
+                                <a href="/dang-nhap" class="dropdown-item">
+                                    <i class="fas fa-door-open mr-2"></i> Đăng nhập
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <a href="/dang-ky" class="dropdown-item">
+                                    <i class="fas fa-key mr-2"></i> Đăng ký
+                                </a>
+                            </div>
+                        }
 
                         <a href="/gio-hang" class="icons-btn d-inline-block bag">
                             <span class="icon-shopping-bag"></span>
-                            <span class="number">0</span>
+                            <span class="number">@quantity</span>
                         </a>
+                        
+                        <div id="alertCart" class="@((TempData["Message"] != null) ? TempData["css"] : "")">
+                            <span>@((TempData["Message"] != null) ? @TempData["Message"] : "")</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -135,7 +162,16 @@
     <script src="../../wwwroot/js/jquery.magnific-popup.min.js"></script>
 
     <script src="../../wwwroot/js/main.js"></script>
+    <script>
+        $(document).ready(function () {
+            setTimeout(function () {
+                $(".alert-success").fadeOut('slow');
+                $(".alert-danger").fadeOut('slow');
+            }, 2300);
+        });
+    </script>
 
+    @RenderSection("Scripts", required: false)
 </body>
 
 </html>

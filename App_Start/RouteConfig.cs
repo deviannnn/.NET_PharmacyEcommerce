@@ -42,6 +42,13 @@ namespace Pharmacy
             );
 
             routes.MapRoute(
+                name: "CheckOut",
+                url: "thanh-toan-dat-hang",
+                defaults: new { controller = "Orders", action = "Index" },
+                namespaces: new[] { "Pharmacy.Controllers" }
+            );
+
+            routes.MapRoute(
                 name: "Login",
                 url: "dang-nhap",
                 defaults: new { controller = "Account", action = "Login" },
@@ -53,6 +60,14 @@ namespace Pharmacy
                 url: "dang-ky",
                 defaults: new { controller = "Account", action = "Register" },
                 namespaces: new[] { "Pharmacy.Controllers" }
+            );
+
+            routes.MapRoute(
+                name: "OrderHistory",
+                url: "lich-su-dat-hang",
+                defaults: new { controller = "Orders", action = "OrderHistory" },
+                namespaces: new[] { "Pharmacy.Controllers" }
+
             );
 
             routes.MapRoute(

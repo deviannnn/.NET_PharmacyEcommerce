@@ -11,7 +11,7 @@
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="email" Type="nvarchar" MaxLength="150" Nullable="false" />
-          <Property Name="password" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="password" Type="nvarchar" MaxLength="150" />
           <Property Name="role" Type="int" Nullable="false" />
           <Property Name="permission" Type="int" Nullable="false" />
         </EntityType>
@@ -437,7 +437,7 @@
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="email" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Name="password" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="password" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Name="role" Type="Int32" Nullable="false" />
           <Property Name="permission" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Orders" Relationship="PharmacyModel.Orders_idAccount_fk" FromRole="Account" ToRole="Order" />

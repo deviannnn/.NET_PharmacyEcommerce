@@ -49,12 +49,19 @@
 
                         <div class="row form-group">
                             <div class="col-3">
-                                <label>Số lượng:&nbsp;&nbsp;</label>
+                                <label>Số lượng tồn kho:&nbsp;&nbsp;</label>
                                 @Html.DisplayFor(model => model.quantity)
                             </div>
                             <div class="col-3">
+                                <label>Số lượng lượt mua:&nbsp;&nbsp;</label>
+                                @Html.DisplayFor(model => model.purchase)
+                            </div>
+                        </div>
+
+                        <div class="row form-group">
+                            <div class="col-3">
                                 <label>Đơn giá:&nbsp;&nbsp;</label>
-                                @Html.DisplayFor(model => model.price)
+                                @string.Format("{0:#,##0} VND", Model.price)
                             </div>
                             <div class="col-3">
                                 <label>Giảm giá:&nbsp;&nbsp;</label>
@@ -62,7 +69,7 @@
                             </div>
                             <div class="col-3">
                                 <label>Giá sale:&nbsp;&nbsp;</label>
-                                @Html.DisplayFor(model => model.priceSale)
+                                @string.Format("{0:#,##0} VND", Model.priceSale)
                             </div>
                         </div>
 

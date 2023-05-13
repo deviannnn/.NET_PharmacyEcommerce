@@ -146,13 +146,26 @@
                                         @Html.DisplayFor(modelItem => contactInfo.content)
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(modelItem => contactInfo.type)
+                                        @if (contactInfo.type.Equals("address"))
+                                        {
+                                            <span>Địa chỉ</span>
+                                        }
+                                        else if (contactInfo.type.Equals("phone"))
+                                        {
+                                            <span>Số điện thoại</span>
 
+                                        }
+                                        else if (contactInfo.type.Equals("email"))
+                                        {
+                                            <span>Email</span>
+
+                                        }
                                     </td>
                                     <td>
                                         @(contactInfo.hide.GetValueOrDefault(false) ? "Đang hiển thị" : "Đã ẩn")
                                     </td>
                                     <td>
+
                                         @Html.DisplayFor(modelItem => contactInfo.order)
                                     </td>
                                     <td>

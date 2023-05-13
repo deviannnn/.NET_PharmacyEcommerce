@@ -220,7 +220,7 @@ CREATE TABLE Account
 (
 	[id] int IDENTITY(1,1) PRIMARY KEY,
 	[email] nvarchar(150) NOT NULL,
-	[password] nvarchar(25) NOT NULL,
+	[password] nvarchar(150) NOT NULL,
 	[role] int NOT NULL,
 	[permission] int NOT NULL
 )

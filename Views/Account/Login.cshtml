@@ -26,12 +26,16 @@
 <body class="hold-transition login-page">
     <div class="login-box">
         <div class="login-logo">
-            <a>Pharmacy Login</a>
+            <a>Pharmacy Đăng Nhập</a>
         </div>
         <!-- /.login-logo -->
         <div class="card">
             <div class="card-body login-card-body">
                 <p class="login-box-msg">Đăng nhập để tiếp tục</p>
+                @if (TempData["Message"] != null)
+                {
+                    <p class="@TempData["css"] text-center" id="notification">@TempData["Message"]</p>
+                }
 
                 @using (Html.BeginForm("Login", "Account", FormMethod.Post))
                 {
@@ -46,7 +50,7 @@
                         </div>
                     </div>
                     <div class="input-group mb-3">
-                        @Html.Password("password", null, new { @class = "form-control", placeholder = "Password" })
+                        @Html.Password("password", null, new { @class = "form-control", placeholder = "Mật khẩu", maxlength = "25" })
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-lock"></span>
@@ -98,6 +102,11 @@
     <script src="~/Areas/admin/wwwroot/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- AdminLTE App -->
     <script src="~/Areas/admin/wwwroot/dist/js/adminlte.min.js"></script>
+    <script>
+        setTimeout(function () {
+            document.getElementById('notification').style.display = 'none';
+        }, 3000);
+    </script>
 
 </body>
 </html>

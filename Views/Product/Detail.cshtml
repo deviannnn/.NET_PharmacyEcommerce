@@ -46,20 +46,50 @@
                     }
                 </p>
                 <div class="mb-5">
-                    <div class="input-group mb-3" style="max-width: 220px;">
-                        <div class="input-group-prepend">
-                            <button class="btn btn-outline-primary js-btn-minus" type="button">&minus;</button>
+                    <form id="addToCartForm" action="@Url.Action("AddToCart", "Cart")" method="post">
+                        <div class="input-group mb-3" style="max-width: 220px;">
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="productId" value="@Model.id" />
+
+                            <div class="input-group-prepend">
+                                <button class="btn btn-outline-primary js-btn-minus" type="button" onclick="decreaseQuantity();">&minus;</button>
+                            </div>
+                            <input type="text" class="form-control text-center" name="quantity" id="quantityInput" value="1"
+                                   readonly style="background: white">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-primary js-btn-plus" type="button" onclick="increaseQuantity();">&plus;</button>
+                            </div>
                         </div>
-                        <input type="text" class="form-control text-center" value="1" placeholder=""
-                               aria-label="Example text with button addon" aria-describedby="button-addon1">
-                        <div class="input-group-append">
-                            <button class="btn btn-outline-primary js-btn-plus" type="button">&plus;</button>
-                        </div>
-                    </div>
+                    </form>
                 </div>
-                <p><a href="#" class="buy-now btn btn-sm height-auto px-4 py-3 btn-primary">Thêm vào giỏ hàng</a></p>
+                <p>
+                    <a class="buy-now btn btn-sm height-auto px-4 py-3 btn-primary text-dark" onclick="addToCart();" style="cursor: pointer">
+                        Thêm vào giỏ hàng
+                    </a>
+                </p>
             </div>
         </div>
     </div>
 </div>
 
+@section Scripts {
+    <script>
+        function decreaseQuantity() {
+            var quantityInput = document.getElementById('quantityInput');
+            var currentQuantity = parseInt(quantityInput.value);
+            if (currentQuantity > 1) {
+                quantityInput.value = currentQuantity - 1;
+            }
+        }
+
+        function increaseQuantity() {
+            var quantityInput = document.getElementById('quantityInput');
+            var currentQuantity = parseInt(quantityInput.value);
+            quantityInput.value = currentQuantity + 1;
+        }
+
+        function addToCart() {
+            document.getElementById('addToCartForm').submit();
+        }
+    </script>
+}

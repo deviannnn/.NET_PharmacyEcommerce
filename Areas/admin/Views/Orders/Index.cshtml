@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Pharmacy.Models.Banner>
+﻿@model IEnumerable<Pharmacy.Models.Order>
 
 @{
     ViewBag.Title = "Index";
@@ -21,12 +21,12 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0 text-dark">Banner</h1>
+                <h1 class="m-0 text-dark">Đơn hàng</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="/admin">Trang Chủ</a></li>
-                    <li class="breadcrumb-item active">Banner</li>
+                    <li class="breadcrumb-item active">Đơn hàng</li>
                 </ol>
             </div>
         </div>
@@ -39,11 +39,8 @@
     <div class="row">
         <div class="col-12">
             <div class="card">
-                <!-- Card Header -->
                 <div class="card-header">
-                    <a href="@Url.Action("Create", "Banners")" class="text-light">
-                        <button type="button" class="btn btn-success col-2">Thêm banner</button>
-                    </a>
+                    <h3 class="card-title">Danh sách đơn hàng</h3>
                 </div>
                 <!-- Card Body -->
                 <div class="card-body">
@@ -57,58 +54,65 @@
                     <table id="example2" class="table table-bordered table-hover">
                         <thead>
                             <tr>
-                                <th>STT</th>
-                                <th>Tiêu đề</th>
-                                <th>Ảnh banner</th>
-                                <th>Trang</th>
-                                <th>Hiển thị</th>
-                                <th>Vị trí</th>
-                                <th>Ngày cập nhật</th>
+                                <th>Mã đơn hàng</th>
+                                <th>Tài khoản</th>
+                                <th>Tổng đơn</th>
+                                <th>Ngày đặt </th>
+                                <th>Trạng thái đơn hàng</th>
                                 <th></th>
                             </tr>
                         </thead>
                         <tbody>
-                            @{ var STT = 1; }
                             @foreach (var item in Model)
                             {
                                 <tr>
                                     <td>
-                                        @Html.Raw(STT++)
-                                    </td>
-                                    <td style="text-align: start">
-                                        @Html.DisplayFor(modelItem => item.tittle)
-                                    </td>
-                                    <td style="padding: 7px">
-                                        <img src="~/wwwroot/upload/img/banner/@item.img" style="width:120px; height: 70px" />
+                                        #@item.id
                                     </td>
                                     <td>
-                                        @if (item.page.Equals("HOME"))
+                                        @Html.DisplayFor(modelItem => item.Account.email)
+                                    </td>
+                                    <td>
+                                        @string.Format("{0:#,##0} VND", item.total_amount)
+                                    </td>
+                                    <td>
+                                        @(item.datecreate.HasValue ? item.datecreate.Value.ToString("dd/MM/yyyy") : "")
+                                    </td>
+                                    <td>
+                                        @if (item.status == 0)
                                         {
-                                            <span>Trang chủ</span>
-                                        }
-                                        else if (item.page.Equals("ABOUT"))
-                                        {
-                                            <span>Tin tức</span>
+                                            <span class="text-warning">Chờ duyệt</span>
 
                                         }
-                                        else if (item.page.Equals("NEWS"))
+                                        else if (item.status == 1)
                                         {
-                                            <span>Thông tin nhà thuốc</span>
+                                            <span class="text-cyan">Đang chờ vận chuyển</span>
+                                        }
+                                        else if (item.status == 2)
+                                        {
+                                            <span class="text-success">Giao hàng thành công</span>
+                                        }
+                                        else if (item.status == -1)
+                                        {
+                                            <span class="text-danger">Đơn hàng bị huỷ</span>
                                         }
                                     </td>
                                     <td>
-                                        @(item.hide.GetValueOrDefault(false) ? "Đang hiển thị" : "Đã ẩn")
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.order)
-                                    </td>
-                                    <td>
-                                        @(item.datebegin.HasValue ? item.datebegin.Value.ToString("dd/MM/yyyy") : "")
-                                    </td>
-                                    <td>
-                                        <a href="@Url.Action("Edit", "Banners", new { id = item.id })"><button type="button" class="btn btn-warning">Sửa</button></a>
-                                        <a href="@Url.Action("Details", "Banners", new { id = item.id })"><button type="button" class="btn btn-default">Chi tiết</button></a>
-                                        <a href="@Url.Action("Delete", "Banners", new { id = item.id })"><button type="button" class="btn btn-danger">Xóa</button></a>
+                                        @if (item.status == 0)
+                                        {
+                                            <a href="@Url.Action("Confirm", "Orders", new { id = item.id })"><button type="button" class="btn btn-block btn-primary btn-xs">Duyệt đơn</button></a>
+                                            <a href="@Url.Action("Cancel", "Orders", new { id = item.id })"><button type="button" class="btn btn-block btn-danger btn-xs">Huỷ đơn</button></a>
+                                        }
+                                        else if (item.status == -1)
+                                        {
+                                            <a href="@Url.Action("Confirm", "Orders", new { id = item.id })"><button type="button" class="btn btn-block btn-primary btn-xs">Mở lại đơn</button></a>
+                                        }
+                                        else if (item.status == 1)
+                                        {
+                                            <a href="@Url.Action("Cancel", "Orders", new { id = item.id })"><button type="button" class="btn btn-block btn-danger btn-xs">Huỷ đơn</button></a>
+                                        }
+                                        
+                                        <a href="@Url.Action("Details", "Orders", new { id = item.id })"><button type="button" class="btn btn-block btn-default btn-xs">Chi tiết</button></a>
                                     </td>
                                 </tr>
                             }
@@ -141,3 +145,4 @@
         });
     </script>
 }
+

@@ -11,7 +11,7 @@ using Pharmacy.Models;
 
 namespace Pharmacy.Areas.admin.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    [Authorize]
     public class QuickLinksController : Controller
     {
         private PharmacyEntities db = new PharmacyEntities();

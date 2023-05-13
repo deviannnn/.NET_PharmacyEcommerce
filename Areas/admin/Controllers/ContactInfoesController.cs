@@ -10,7 +10,7 @@ using Pharmacy.Models;
 
 namespace Pharmacy.Areas.admin.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    [Authorize]
     public class ContactInfoesController : Controller
     {
         private PharmacyEntities db = new PharmacyEntities();
